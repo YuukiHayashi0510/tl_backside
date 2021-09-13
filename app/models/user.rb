@@ -18,13 +18,21 @@ class User < ApplicationRecord
   has_many :evaluations, dependent: :destroy
 
   # 多対多のアソシエーション
-  has_many :lectures, through: :current_lectures
-  has_many :lectures, through: :past_lectures
+  has_many :lectures_current, through: :current_lectures
+  has_many :lectures_past, through: :past_lectures
   has_many :current_lectures, dependent: :destroy
   has_many :past_lectures, dependent: :destroy
 
   # ログインにメアド、名前使えるようにする
   attr_accessor :login
+
+  def addCurrentLec(lecture)
+    current_lectures.find_or_create_by(lecture_id: lecture.id)
+  end
+
+  def addPastLec(lecture)
+    past_lectures.find_or_create_by(lecture_id: lecture.id)
+  end
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

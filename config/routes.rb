@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'current_lectures/create'
+  get 'current_lectures/destroy'
   get 'evaluations/show/:lecture_id' => 'evaluations#show',as: 'evaluations_show'
   get 'evaluations/new/:lecture_id' => 'evaluations#new', as: 'evaluations_new'
   post 'evaluations/new/:lecture_id' => 'evaluations#create' 
@@ -39,6 +41,10 @@ Rails.application.routes.draw do
 
   resources :lectures do
     resources :comments, only: [:create, :destroy]
+
+    # current_lectureの登録機能
+    resources :current_lectures, only: [:create, :destroy]
+    resources :past_lectures, only: [:create, :destroy]
   end
 
   resources :top

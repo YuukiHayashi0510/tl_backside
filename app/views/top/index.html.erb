@@ -3,9 +3,9 @@
 <p>質問と講義一覧を載せるトップページ</p>
 
 <h3>質問を検索</h3>
- <%= form_tag({controller:"top",action:"index"}, method: :get) do %>
-   <%= text_field_tag :search %>
-   <%= submit_tag '検索する'  %>
+<%= form_tag({controller:"top",action:"index"}, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag '検索する'  %>
 <% end %>
 
 <h3>質問一覧</h3>
