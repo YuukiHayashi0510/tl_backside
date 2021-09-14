@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'past_lectures/create'
+  get 'past_lectures/destroy'
   get 'current_lectures/create'
   get 'current_lectures/destroy'
   get 'evaluations/show/:lecture_id' => 'evaluations#show',as: 'evaluations_show'
@@ -44,6 +46,7 @@ Rails.application.routes.draw do
 
     # current_lectureの登録機能
     resources :current_lectures, only: [:create, :destroy]
+    resources :past_lectures, only: [:create, :destroy]
   end
 
   resources :top

@@ -12,5 +12,10 @@
         <%= link_to lecture_current_lectures_path(t.id), method: :post do %>
             <p>現在の講義に登録</p>
         <% end %>
+    <% end %>    
+    <% if user_signed_in? %>
+        <%= link_to lecture_past_lectures_path(t.id), method: :post do %>
+            <p>過去の講義に登録</p>
+        <% end %>
     <% end %>
 <% end %>
