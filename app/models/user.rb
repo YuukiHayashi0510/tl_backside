@@ -18,8 +18,8 @@ class User < ApplicationRecord
   has_many :evaluations, dependent: :destroy
 
   # 多対多のアソシエーション
-  has_many :lectures_current, through: :current_lectures
-  has_many :lectures_past, through: :past_lectures
+  has_many :lectures_current, through: :current_lectures, source: :lecture
+  has_many :lectures_past, through: :past_lectures, source: :lecture
   has_many :current_lectures, dependent: :destroy
   has_many :past_lectures, dependent: :destroy
 
@@ -36,9 +36,5 @@ class User < ApplicationRecord
     end
   end
 
-  # 既に現在の講義に登録しているかの判定
-  def already_current?(lecture)
-    self.current_lectures.exists?(lecture_id: lecture.id)
-  end
 
 end
