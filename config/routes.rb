@@ -44,7 +44,6 @@ Rails.application.routes.draw do
 
     # current_lectureの登録機能
     resources :current_lectures, only: [:create, :destroy]
-    resources :past_lectures, only: [:create, :destroy]
   end
 
   resources :top

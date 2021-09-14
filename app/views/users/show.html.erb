@@ -8,10 +8,16 @@
 <% @user.questions.each do |t| %>
   <%= t.user.name %>
   <%= t.body %>
+  <br />
 <% end %>
 
 <br />
 <h3>ユーザーの取得講義一覧</h3>
+<p>科目名：担当教員名</p>
+<% @user.current_lectures.each do |t| %>
+  <%= t.lecture.name %> ： <%= t.lecture.teacher %><%= link_to "詳細へ", lecture_path(t.lecture.id) %>
+  <br />
+<% end %>
 
 
 <% if current_user.id == @user.id %>

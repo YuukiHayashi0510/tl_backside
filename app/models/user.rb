@@ -26,14 +26,7 @@ class User < ApplicationRecord
   # ログインにメアド、名前使えるようにする
   attr_accessor :login
 
-  def addCurrentLec(lecture)
-    current_lectures.find_or_create_by(lecture_id: lecture.id)
-  end
-
-  def addPastLec(lecture)
-    past_lectures.find_or_create_by(lecture_id: lecture.id)
-  end
-
+  # ユーザーネームorメアドでログインできるようにする
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -41,6 +34,11 @@ class User < ApplicationRecord
     else
       where(conditions).first
     end
+  end
+
+  # 既に現在の講義に登録しているかの判定
+  def already_current?(lecture)
+    self.current_lectures.exists?(lecture_id: lecture.id)
   end
 
 end
