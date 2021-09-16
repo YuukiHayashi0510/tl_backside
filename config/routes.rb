@@ -7,13 +7,11 @@ Rails.application.routes.draw do
   get 'evaluations/show/:lecture_id' => 'evaluations#show',as: 'evaluations_show'
   get 'evaluations/new/:lecture_id' => 'evaluations#new', as: 'evaluations_new'
   post 'evaluations/new/:lecture_id' => 'evaluations#create' 
-  get 'evaluations/edit'
-  get 'evaluations/update'
 
   get 'comments/create'
   get 'comments/destroy'
   
-  get 'lectures/index' => 'lectures#index'
+  # get 'lectures/index' => 'lectures#index'
   # get 'lectures/show' => 'lectures#show'
   
   get 'top/about'
@@ -49,7 +47,6 @@ Rails.application.routes.draw do
     resource :past_lectures, only: [:create, :destroy]
   end
 
-  resources :top
   resources :evaluations
 
   root 'top#about'

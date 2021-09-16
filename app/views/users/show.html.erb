@@ -5,8 +5,8 @@
 <p>プロフィール : <%= @user.profile %></p>
 
 <h3>ユーザーの質問一覧</h3>
-<% @user.questions.each do |t| %>
-  <%= t.user.name %>
+<% @user.questions.order("updated_at DESC").each do |t| %>
+  <%= image_tag t.image_url, size: "250x200" if t.image? %>
   <%= t.body %>
   <br />
 <% end %>
