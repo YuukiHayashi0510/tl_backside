@@ -12,13 +12,13 @@
 <div class="questions-container">
     <% @questions.order("updated_at desc").each do |t| %>
         <div class="question">
-            <%= t.user.name %>
-            <%= t.body %>
+            <%= t.user.name %><br />
             <%= image_tag t.image_url, size: "250x200" if t.image? %>
-            <%= t.updated_at %>
+            <%= t.body %><br />
+            <%= t.updated_at %><br />
             <%= link_to "詳細へ", question_path(t.id) %>
             <%= link_to "編集する", edit_question_path(t.id) %>
-            <%= button_to "削除する", question_path(t.id), method: :delete %>
+            <%= link_to "削除する", question_path(t.id), method: :delete %>
         </div>
     <% end %>
 </div>
