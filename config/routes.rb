@@ -45,8 +45,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
 
     # current_lectureの登録機能
-    resources :current_lectures, only: [:create, :destroy]
-    resources :past_lectures, only: [:create, :destroy]
+    resource :current_lectures, only: [:create, :destroy]
+    resource :past_lectures, only: [:create, :destroy]
   end
 
   resources :top

@@ -4,19 +4,35 @@
 <p>科目名：担当教員名</p>
 <% @lectures.each do |t| %>
     <%= t.name %>：
-    <%= t.teacher %><br />
+    <%= t.teacher %>
     <%= link_to "詳細へ", lecture_path(t.id) %>
     <br />
-    
     <% if user_signed_in? %>
-        <%= link_to lecture_current_lectures_path(t.id), method: :post do %>
-            <p>現在の講義に登録</p>
+
+        <% if current_user.already_current_registered?(t) %>
+            <%= link_to lecture_current_lectures_path(t), method: :delete do %>
+            現在の講義を取り消す
+            <% end %>
+        <% else %>
+
+            <% if current_user.already_past_registered?(t) %>
+                <%= link_to lecture_past_lectures_path(t), method: :delete do %>
+                過去の講義を取り消す
+                <% end %>
+            <% else %>
+                <%= link_to lecture_current_lectures_path(t), method: :post do %>
+                    現在の講義に登録
+                <% end %>
+                <%= link_to lecture_past_lectures_path(t), method: :post do %>
+                    過去の講義に登録
+                <% end %>
+            <% end %>
+
         <% end %>
 
-    <% end %>    
-    <% if user_signed_in? %>
-        <%= link_to lecture_past_lectures_path(t.id), method: :post do %>
-            <p>過去の講義に登録</p>
-        <% end %>
+
+
     <% end %>
+    <br />
+
 <% end %>

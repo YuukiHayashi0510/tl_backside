@@ -37,4 +37,14 @@ class User < ApplicationRecord
   end
 
 
+  # 現在の講義に登録されているか確認
+  def already_current_registered?(lecture)
+    self.current_lectures.exists?(lecture_id: lecture.id)
+  end
+
+  # 過去の講義に登録されているか確認
+  def already_past_registered?(lecture)
+    self.past_lectures.exists?(lecture_id: lecture.id)
+  end
+
 end
