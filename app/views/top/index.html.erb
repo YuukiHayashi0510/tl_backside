@@ -14,10 +14,21 @@
         <div class="question">
             <%= t.user.name %>
             <%= t.body %>
+            <%= image_tag t.image_url, size: "250x200" if t.image? %>
             <%= t.updated_at %>
             <%= link_to "詳細へ", question_path(t.id) %>
             <%= link_to "編集する", edit_question_path(t.id) %>
             <%= button_to "削除する", question_path(t.id), method: :delete %>
+        </div>
+    <% end %>
+</div>
+
+<h3>現在受講中の講義</h3>
+<div class="current-lectures-container">
+    <% @current_lectures.each do |l| %>
+        <div class="current-lecture">
+            <%= l.lecture.name %>
+            <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
         </div>
     <% end %>
 </div>

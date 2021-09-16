@@ -12,5 +12,8 @@ class TopController < ApplicationController
     else
       @questions = Question.all
     end
+
+    @current_lectures = CurrentLecture.all
+
   end
 end

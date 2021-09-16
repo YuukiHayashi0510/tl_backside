@@ -5,6 +5,12 @@
     <%= f.label :質問内容 %>
     <%= f.text_field :body, :size => 140 %>
   </div>
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
   <%= f.submit "質問する" %>
 <% end %>
 <%= link_to "質問一覧へ", top_index_path %>
