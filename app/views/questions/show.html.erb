@@ -3,6 +3,7 @@
 
 <h3>質問の詳細</h3>
 <div class="question">
+  <%= image_tag @question.image_url, size: "250x200" if @question.image? %>
   <p><%= @question.body %></p>
   <p><%= @question.created_at %></p>
 </div>

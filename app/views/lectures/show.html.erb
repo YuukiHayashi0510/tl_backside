@@ -1,9 +1,14 @@
 <h1>Lectures#show</h1>
 <p>Find me in app/views/lectures/show.html.erb</p>
-<p>講義詳細ページ</p>
+<h3>講義詳細ページ</h3>
+
+<div class="lecture">
+  <p><%= @lecture.name %></p>
+  <p><%= @lecture.teacher %></p>
+</div>
 
 <div class="comment-wrapper">
-  <p>コメント一覧</p>
+  <h3>コメント一覧</h3>
   <% @comments.each do |c| %>
     <div>
       <%= c.user.name unless c.user.blank? %>

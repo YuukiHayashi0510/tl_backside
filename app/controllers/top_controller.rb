@@ -14,6 +14,7 @@ class TopController < ApplicationController
     end
 
     @current_lectures = CurrentLecture.all
+    @past_lectures = PastLecture.all
 
   end
 end

@@ -14,9 +14,9 @@
         <div class="question">
             <%= image_tag t.user.image_url,class:"rounded-circle", size: "40x40" if t.user.image? %> <%# アイコン表示 %>
             <%= t.user.name %><br />
-            <%= image_tag t.image_url, size: "250x200" if t.image? %>
+            <%= image_tag t.image_url, size: "250x200" if t.image? %><br />
             <%= t.body %><br />
-            <%= t.updated_at %><br />
+            <%= t.updated_at.to_s(:datetime_jp) %><br />
             <%= link_to "詳細へ", question_path(t.id) %>
             <%= link_to "編集する", edit_question_path(t.id) %>
             <%= link_to "削除する", question_path(t.id), method: :delete %>
@@ -28,6 +28,16 @@
 <div class="current-lectures-container">
     <% @current_lectures.each do |l| %>
         <div class="current-lecture">
+            <%= l.lecture.name %>
+            <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
+        </div>
+    <% end %>
+</div>
+
+<h3>過去に受講した講義</h3>
+<div class="past-lectures-container">
+    <% @past_lectures.each do |l| %>
+        <div class="past-lecture">
             <%= l.lecture.name %>
             <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
         </div>
