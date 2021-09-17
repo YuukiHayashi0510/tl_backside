@@ -26,6 +26,9 @@ class User < ApplicationRecord
   # ログインにメアド、名前使えるようにする
   attr_accessor :login
 
+  # トップ画像の実装 
+  mount_uploader :image, ImageUploader
+
   # ユーザーネームorメアドでログインできるようにする
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

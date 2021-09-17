@@ -1,8 +1,13 @@
 <%# users/show.html.erb %>
 
 <h1>users#show</h1>
+<%= image_tag @user.image_url, size: "250x200" if @user.image? %>
 <p>名前 : <%= @user.name %></p>
 <p>プロフィール : <%= @user.profile %></p>
+
+<% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path %>
+<% end %><br /><br />
 
 <h3>ユーザーの質問一覧</h3>
 <% @user.questions.order("updated_at DESC").each do |t| %>
@@ -26,9 +31,5 @@
   <br />
 <% end %>
 
-
-<% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path %>
-<% end %><br />
 
 <%= link_to "質問一覧に戻る",top_index_path %>
