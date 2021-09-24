@@ -8,4 +8,7 @@ class Lecture < ApplicationRecord
     has_many :past_users, through: :past_lectures
     has_many :past_lectures, dependent: :destroy
     has_many :current_lectures, dependent: :destroy
+
+    mount_uploader :pdf, PdfUploader
+
 end
