@@ -17,6 +17,10 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :evaluations, dependent: :destroy
 
+  # いいね機能
+  has_many :likes, dependent: :destroy
+  has_many :liked_questions, through: :likes, source: :question
+
   # 多対多のアソシエーション
   has_many :lectures_current, through: :current_lectures, source: :lecture
   has_many :lectures_past, through: :past_lectures, source: :lecture
@@ -48,6 +52,11 @@ class User < ApplicationRecord
   # 過去の講義に登録されているか確認
   def already_past_registered?(lecture)
     self.past_lectures.exists?(lecture_id: lecture.id)
+  end
+
+  # いいねされているかチェック
+  def already_liked?(question)
+    self.likes.exists?(question_id: question.id)
   end
 
 end

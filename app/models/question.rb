@@ -6,4 +6,8 @@ class Question < ApplicationRecord
 
     has_many :answers, dependent: :destroy
 
+    # いいね機能
+    has_many :likes, dependent: :destroy
+    has_many :liked_users, through: :likes, source: :user
+
 end

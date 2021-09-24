@@ -29,5 +29,25 @@
   <% end %>
 </div>
 
+<% if user_signed_in? %>
+  <% if current_user.already_liked?(@question) %>
+    <%= link_to tweet_like_path(@question), method: :delete do %>
+      <p>いいねを取り消す</p><%= @question.likes.count %>
+    <% end %>
+  <% else %>
+    <%= link_to tweet_likes_path(@question), method: :post do %>
+      <p>いいね</p><%= @question.likes.count %>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>いいねの数 = </p><%= @question.likes.count %>
+<% end %>
+
+<h2>いいねしたユーザー</h2>
+<% @question.liked_users.each do |user| %>
+  <li><%= user.name %></li>
+<% end %>
+
+
 <%= link_to "編集する", edit_question_path(@question.id) %>
 <%= link_to "一覧に戻る", top_index_path %>
