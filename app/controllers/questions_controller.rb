@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     question = Question.new(question_params)
     question.user_id = current_user.id
     if question.save!
-      redirect_to "http://localhost:3000/top/index"
+      redirect_to top_index_path
     else
       redirect_to :action => "new"
     end
@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
   def destroy
     question = Question.find(params[:id])
     question.destroy
-    redirect_to "http://localhost:3000/top/index"
+    redirect_to top_index_path
   end
 
   def show

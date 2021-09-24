@@ -12,7 +12,7 @@
   <p>回答一覧</p>
   <% @answers.each do |c| %>
     <div>
-      <%= c.user.email unless c.user.blank? %>
+      <%= c.user.name unless c.user.blank? %>
       <br>
       <%= c.body %>
     </div>

@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
     def destroy
       answer = Answer.find(params[:id])
       answer.destroy
-      redirect_to "http://localhost:3000/question/:id"
+      redirect_to question_path(:id)
     end
     
   
