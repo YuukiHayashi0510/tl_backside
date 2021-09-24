@@ -31,11 +31,11 @@
 
 <% if user_signed_in? %>
   <% if current_user.already_liked?(@question) %>
-    <%= link_to tweet_like_path(@question), method: :delete do %>
+    <%= link_to question_like_path(@question), method: :delete do %>
       <p>いいねを取り消す</p><%= @question.likes.count %>
     <% end %>
   <% else %>
-    <%= link_to tweet_likes_path(@question), method: :post do %>
+    <%= link_to question_likes_path(@question), method: :post do %>
       <p>いいね</p><%= @question.likes.count %>
     <% end %>
   <% end %>
