@@ -7,10 +7,11 @@
   <p><%= @lecture.teacher %></p>
 </div>
 
+<%= link_to "評価の詳細", evaluations_show_path(@lecture.id) %><br />
 
 <div class="pdf-wrapper">
   <h3>過去問PDF</h3>
-  <object data="<%= @lecture.pdf.url %>" type="application/pdf"></object>
+  <object data="<%= @lecture.pdf.url %>" type="application/pdf" width="400" height="600"></object>
   <%= form_with(model: [@lecture], local: true) do |f| %>
     <%= f.label :pdf %>
     <%= f.file_field :pdf %>
@@ -41,5 +42,4 @@
   <% end %>
 </div>
 
-<%= link_to "評価の詳細", evaluations_show_path(@lecture.id) %><br />
 <%= link_to "講義一覧に戻る", lectures_path %>

@@ -5,7 +5,8 @@
 <div class="question">
   <%= image_tag @question.image_url, size: "250x200" if @question.image? %>
   <p><%= @question.body %></p>
-  <p><%= @question.created_at %></p>
+  <%= link_to "編集する", edit_question_path(@question.id) %><br />
+  <p><%= @question.updated_at.to_s(:datetime_jp) %></p>
 </div>
 
 <div class="answer-wrapper">
@@ -49,5 +50,4 @@
 <% end %>
 
 
-<%= link_to "編集する", edit_question_path(@question.id) %>
 <%= link_to "一覧に戻る", top_index_path %>

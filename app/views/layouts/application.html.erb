@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TL_Community</title>
+    <title>TL-BackSide</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,7 +15,7 @@
 
   <body>
     <header>
-      <h1><%= link_to "TL_Community", top_index_path %></h1>
+      <h1><%= link_to "TL-BackSide", top_index_path %></h1>
       <% if user_signed_in? %>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"} %></li>
       <% else %>
@@ -30,10 +30,10 @@
               <div class="dd-item">
                   <a><%= link_to "トップ", top_index_path %></a>
                   <a><%= link_to "About", top_about_path %></a>
-                  <a><%= link_to "講義一覧", lectures_path %></a>
               </div>
               <% if user_signed_in? %>
                 <div class="dd-item">
+                  <a><%= link_to "講義一覧", lectures_path %></a>
                   <a><%= link_to "新しい質問", new_question_path %></a>
                   <a><%= link_to "マイページ", user_path(current_user.id) %></a>
                 </div>

@@ -7,7 +7,8 @@ class QuestionsController < ApplicationController
   def create
     question = Question.new(question_params)
     question.user_id = current_user.id
-    if question.save!
+    if question.body != ""
+      question.save
       redirect_to top_index_path
     else
       redirect_to :action => "new"
