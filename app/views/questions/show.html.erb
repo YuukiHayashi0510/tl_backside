@@ -5,7 +5,7 @@
 <div class="question">
   <%= image_tag @question.image_url, size: "250x200" if @question.image? %>
   <p><%= @question.body %></p>
-  <%= link_to "編集する", edit_question_path(@question.id) %><br />
+  <%= link_to "編集する", edit_question_path(@question.id) if current_user.id == @question.user_id %><br />
   <p><%= @question.updated_at.to_s(:datetime_jp) %></p>
 </div>
 
@@ -16,7 +16,7 @@
       <%= c.user.name unless c.user.blank? %>
       <br>
       <%= c.body %>
-      <%= link_to "削除する", question_answers_path(@question.id), method: :delete %>
+      <%= link_to "削除する", question_answers_path(@question.id), method: :delete if current_user.id == c.user_id %>
     </div>
       <br>
   <% end %>

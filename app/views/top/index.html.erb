@@ -31,8 +31,8 @@
             <% end %>
             <%= link_to "詳細へ", question_path(t.id) %>
             <% if user_signed_in? && current_user.id == t.user_id %>
-            <%= link_to "編集する", edit_question_path(t.id) %>
-            <%= link_to "削除する", question_path(t.id), method: :delete %>
+                <%= link_to "編集する", edit_question_path(t.id) %>
+                <%= link_to "削除する", question_path(t.id), method: :delete %>
             <% end %>
             <br />
             <%= t.updated_at.to_s(:datetime_jp) %>

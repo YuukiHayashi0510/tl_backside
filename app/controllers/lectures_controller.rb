@@ -12,10 +12,14 @@ class LecturesController < ApplicationController
 
   def update
     lecture = Lecture.find(params[:id])
-    if lecture.update(lecture_params)
-      redirect_to :action => "show"
+    if lecture.user_id != current_user.id
+      redirect_to root_path, :alert => '不正な編集です'
     else
-      redirect_to :action => "show"
+      if lecture.update(lecture_params)
+        redirect_to :action => "show"
+      else
+        redirect_to :action => "show"
+      end
     end
   end
 
