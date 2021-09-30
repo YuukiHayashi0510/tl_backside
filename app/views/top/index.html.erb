@@ -46,6 +46,7 @@
         <% if current_user.id == l.user_id %>
             <div class="current-lecture">
                 <%= l.lecture.name %>
+                <%= l.lecture.term %>
                 <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
             </div>
         <% end %>
@@ -58,6 +59,7 @@
         <% if current_user.id == l.user_id %>
             <div class="past-lecture">
                 <%= l.lecture.name %>
+                <%= l.lecture.grade %>年次
                 <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
             </div>
         <% end %>

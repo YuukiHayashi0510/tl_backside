@@ -2,9 +2,10 @@
 <p>Find me in app/views/lectures/index.html.erb</p>
 <p>講義一覧ページ</p>
 <p>科目名：担当教員名</p>
-<% @lectures.each do |t| %>
+<% @lectures.order(:grade).order(:term).each do |t| %>
     <%= t.name %>：
     <%= t.teacher %>
+    <%= t.term %>
     <%= link_to "詳細へ", lecture_path(t.id) %>
     <br />
     <% if user_signed_in? %>

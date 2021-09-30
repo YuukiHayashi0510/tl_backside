@@ -1,3 +1,23 @@
 <h1>Evaluations#edit</h1>
 <p>Find me in app/views/evaluations/edit.html.erb</p>
+
+<%= @evaluation.lecture.name %>
+
+
 <p>評価の編集</p>
+
+
+<%= form_for @evaluation do |f| %>
+    <%= f.label :overall %>
+    <%= f.text_field :overall, :size => 140 %><br />
+    <%= f.label :understandability %>
+    <%= f.text_field :understandability, :size => 140 %><br /> 
+    <%= f.label :usefulness %>
+    <%= f.text_field :usefulness, :size => 140 %><br />
+    <%= f.label :easy %>
+    <%= f.text_field :easy, :size => 140 %><br />
+    <%= f.label :assignment %>
+    <%= f.text_field :assignment, :size => 140 %><br />
+    <%= f.submit "編集する" %>
+<% end %>
+<%= link_to "評価一覧に戻る", evaluations_index_path(@evaluation.lecture_id) %>

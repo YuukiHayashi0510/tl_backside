@@ -16,6 +16,7 @@
       <%= c.user.name unless c.user.blank? %>
       <br>
       <%= c.body %>
+      <%= link_to "削除する", question_answers_path(@question.id), method: :delete %>
     </div>
       <br>
   <% end %>

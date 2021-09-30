@@ -16,6 +16,10 @@ class CommentsController < ApplicationController
     end
 
     def destroy
+      comment = Comment.find_by(params[:id])
+      lecture = Lecture.find(params[:lecture_id])
+      comment.destroy
+      redirect_to lecture_path(lecture)
     end
     
   

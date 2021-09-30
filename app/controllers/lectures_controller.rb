@@ -21,6 +21,6 @@ class LecturesController < ApplicationController
 
   private
   def lecture_params
-    params.require(:lecture).permit(:name,:teacher,:pdf)
+    params.require(:lecture).permit(:name,:teacher,:pdf,:grade,:term) # grade:学年, term:前期後期通年
   end
 end

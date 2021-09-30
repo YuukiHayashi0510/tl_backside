@@ -3,11 +3,34 @@
 <h3>講義詳細ページ</h3>
 
 <div class="lecture">
-  <p><%= @lecture.name %></p>
-  <p><%= @lecture.teacher %></p>
+  <p><%= @lecture.name %>
+  <%= @lecture.teacher %>
+  <%= @lecture.grade %>年次
+  <%= @lecture.term %></p>
 </div>
 
-<%= link_to "評価の詳細", evaluations_show_path(@lecture.id) %><br />
+<% if current_user.already_current_registered?(@lecture) %>
+    <%= link_to lecture_current_lectures_path(@lecture), method: :delete do %>
+    現在の講義を取り消す
+    <% end %>
+
+<% else %>
+  <% if current_user.already_past_registered?(@lecture) %>
+    <%= link_to lecture_past_lectures_path(@lecture), method: :delete do %>
+      過去の講義を取り消す
+    <% end %>
+
+  <% else %>
+    <%= link_to lecture_current_lectures_path(@lecture), method: :post do %>
+      現在の講義に登録
+    <% end %>
+    <%= link_to lecture_past_lectures_path(@lecture), method: :post do %>
+      過去の講義に登録
+    <% end %>
+  <% end %>
+<% end %><br />
+
+<%= link_to "評価", evaluations_index_path(@lecture.id) %><br />
 
 <div class="pdf-wrapper">
   <h3>過去問PDF</h3>
@@ -28,6 +51,7 @@
       <%= c.user.name unless c.user.blank? %>
       <br>
       <%= c.body %>
+      <%= link_to "削除する", lecture_comment_path(@lecture.id), method: :delete %>
     </div>
       <br>
   <% end %>
@@ -36,7 +60,7 @@
     <%= form_with(model: [@lecture, @comment], local: true) do |f| %>
       <%= f.text_area :body %>
       <%= button_tag type: "submit" do %>
-        <i class="far fa-comments"></i> コメントする
+<i class="far fa-comments"></i> コメントする
       <% end %>
     <% end %>
   <% end %>

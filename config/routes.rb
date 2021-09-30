@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   get 'past_lectures/destroy'
   get 'current_lectures/create'
   get 'current_lectures/destroy'
-  get 'evaluations/show/:lecture_id' => 'evaluations#show',as: 'evaluations_show'
+
+  get 'evaluations/show/:lecture_id' => 'evaluations#show', as: 'evaluations_show'
+  get 'evaluations/index/:lecture_id' => 'evaluations#index',as: 'evaluations_index'
   get 'evaluations/new/:lecture_id' => 'evaluations#new', as: 'evaluations_new'
-  post 'evaluations/new/:lecture_id' => 'evaluations#create' 
+  post 'evaluations/new/:lecture_id' => 'evaluations#create'
 
   get 'comments/create'
   get 'comments/destroy'
@@ -37,7 +39,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resources :questions do
-    resources :answers, only: [:create, :destroy]
+    resource :answers, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
   end
 

@@ -2,11 +2,11 @@ class EvaluationsController < ApplicationController
 
 
   def index
-    
+    @evaluations = Evaluation.all
   end
 
   def show
-    @evaluations = Evaluation.all
+    @evaluation = Evaluation.find(params[:id])
   end
 
   def new
@@ -25,9 +25,16 @@ class EvaluationsController < ApplicationController
   end
 
   def edit
+    @evaluation = Evaluation.find(params[:id])
   end
 
   def update
+    evaluation = Evaluation.find(params[:id])
+    if evaluation.update(evaluation_params)
+      redirect_to evaluations_index_path()
+    else
+      redirect_to evaluations_edit_path
+    end
   end
 
   private
