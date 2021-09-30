@@ -1,6 +1,6 @@
 class Evaluation < ApplicationRecord
 
     belongs_to :user
-    belongs_to :lecture
+    belongs_to :lecture, optional: true
 
 end

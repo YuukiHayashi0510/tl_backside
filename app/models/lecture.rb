@@ -1,7 +1,7 @@
 class Lecture < ApplicationRecord
 
     has_many :comments, dependent: :destroy
-    has_many :evaluations
+    has_many :evaluations, dependent: :destroy
 
     # 多対多のアソシエーション
     has_many :current_users, through: :current_lectures
