@@ -8,6 +8,8 @@
     <%= submit_tag '検索する'  %>
 <% end %>
 
+<%= page_entries_info @questions %>
+
 <h3>質問一覧</h3>
 <div class="questions-container">
     <% @questions.order("updated_at desc").each do |t| %>
@@ -65,3 +67,5 @@
         <% end %>
     <% end %>
 </div>
+
+<%= paginate @questions %>
