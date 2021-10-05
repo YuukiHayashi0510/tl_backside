@@ -32,6 +32,23 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def make_solved
+    @question = Question.find(params[:id])
+    
+    if @question.solved == false
+      @question.solved = true
+    else
+      @question.solved = false
+    end
+    
+    if @question.update(bool_params)
+      flash[:notice] = "編集できました"
+      redirect_to request.referer
+    else
+      redirect_to request.referer
+    end
+  end
+
   def destroy
     question = Question.find(params[:id])
     question.destroy
@@ -47,6 +64,10 @@ class QuestionsController < ApplicationController
   private
   def question_params
     params.require(:question).permit(:body, :image)
+  end
+
+  def bool_params
+    params.permit(:question,:solved)
   end
 
 end

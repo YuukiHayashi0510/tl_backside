@@ -12,10 +12,18 @@
 
 <h3>質問一覧</h3>
 <div class="questions-container">
-    <% @questions.order("updated_at desc").each do |t| %>
+    <% @questions.order("created_at desc").each do |t| %>
         <div class="question">
             <%= image_tag t.user.image_url,class:"rounded-circle", size: "40x40" if t.user.image? %> <%# アイコン表示 %>
             <%= t.user.name %><br />
+            <% if user_signed_in? && current_user.id == t.user_id %>
+                <%= t.solved ? '解決済み' : '回答受付中' %>
+                <% if t.solved %>
+                    <%= link_to '回答受付中に戻す', make_solved_question_path(t.id, post: {solved: false}), method: :put %>
+                <% else %>
+                    <%= link_to '解決済みにする', make_solved_question_path(t.id, post: {solved: true}), method: :put %>
+                <% end %>
+            <% end %><br />
             <%= t.body %>
             <%= image_tag t.image_url, size: "250x200" if t.image? %><br />
             <% if user_signed_in? %>

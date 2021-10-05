@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2021_10_05_133854) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.string "image"
-    t.boolean "solved"
+    t.boolean "solved", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|

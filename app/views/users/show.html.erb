@@ -14,6 +14,18 @@
   <%= image_tag t.image_url, size: "150x100" if t.image? %><br />
   <%= t.body %><br />
   <%= t.updated_at.to_s(:datetime_jp) %>
+  <%= link_to "詳細へ", question_path(t.id) %>
+  <br />
+<% end %>
+
+<h3>ユーザーの回答一覧</h3>
+<% @user.answers.order("updated_at DESC").each do |t| %>
+  <p>質問</p>
+  <%= t.question.user.name %><br />
+  <%= t.question.body  %><br>
+  <p>回答</p>
+  <%= t.body %><br />
+  <%= t.updated_at.to_s(:datetime_jp) %>
   <br />
 <% end %>
 

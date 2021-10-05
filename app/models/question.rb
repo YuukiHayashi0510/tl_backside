@@ -10,4 +10,6 @@ class Question < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_many :liked_users, through: :likes, source: :user
 
+    validates :solved, inclusion: { in: [true,false] }
+
 end

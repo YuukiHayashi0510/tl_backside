@@ -41,6 +41,9 @@ Rails.application.routes.draw do
   resources :questions do
     resource :answers, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
+    member do
+      put 'make_solved'
+    end
   end
 
   resources :lectures do
