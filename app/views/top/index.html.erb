@@ -21,15 +21,15 @@
             <% if user_signed_in? %>
                 <% if current_user.already_liked?(t) %>
                     <%= link_to question_like_path(id: t.id, question_id: t.id), method: :delete do %>
-                        <p>いいねを取り消す</p><%= t.likes.count %>
+                        <i class="fas fa-heart"></i><%= t.likes.count %>
                     <% end %>
                 <% else %>
                     <%= link_to question_likes_path(id: t.id, question_id: t.id), method: :post do %>
-                        <p>いいね</p><%= t.likes.count %>
+                        <i class="fas fa-heart"></i><%= t.likes.count %>
                     <% end %>
                 <% end %>
             <% else %>
-                いいねの数<%= t.likes.count %>
+                <i class="fas fa-heart"></i><%= t.likes.count %>
             <% end %>
             <%= link_to "詳細へ", question_path(t.id) %>
             <% if user_signed_in? && current_user.id == t.user_id %>
@@ -41,6 +41,9 @@
         </div>
     <% end %>
 </div>
+
+<%= paginate @questions %>
+
 
 <h3>現在受講中の講義</h3>
 <div class="current-lectures-container">
@@ -67,5 +70,3 @@
         <% end %>
     <% end %>
 </div>
-
-<%= paginate @questions %>
