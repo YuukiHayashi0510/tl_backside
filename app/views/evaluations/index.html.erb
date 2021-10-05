@@ -3,7 +3,6 @@
 <p>評価一覧</p>
 <%= link_to "新しく評価する", evaluations_new_path(params[:lecture_id]) %><br /><br />
 <% @evaluations.each do |t| %>
-    <%= t.lecture_id %>
     <div style = 'margin:20px; border:2px double black; width:500px;padding-left:20px;'>
 
         <!-- 総合評価の星の部分 --->
