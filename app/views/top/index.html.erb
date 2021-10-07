@@ -1,5 +1,4 @@
 <h1>Top#index</h1>
-<p>Find me in app/views/top/index.html.erb</p>
 <p>質問と現在・過去の講義一覧を載せるトップページ</p>
 
 <h3>質問を検索</h3>
@@ -10,60 +9,72 @@
 
 <%= link_to "質問ランキングへ", questions_index_path %>
 
-<%= page_entries_info @questions %>
 
-<h3>質問一覧</h3>
-<div class="questions-container">
-    <% @questions.order("created_at desc").each do |question| %>
-        <div class="question">
-            <%= image_tag question.user.image_url,class:"rounded-circle", size: "40x40" if question.user.image? %> <%# アイコン表示 %>
-            <%= question.user.name %><br />
-            <div id="solve_buttons_<%= question.id %>">
-                <%= render partial: 'questions/make_solved', locals: {question: question} %>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>質問一覧</h3>
+            <%= page_entries_info @questions %>
+            <div class="questions-container">
+                <% @questions.order("created_at desc").each do |question| %>
+                    <div class="question">
+                        <%= image_tag question.user.image_url,class:"rounded-circle", size: "40x40" if question.user.image? %> <%# アイコン表示 %>
+                        <%= question.user.name %><br />
+                        <div id="solve_buttons_<%= question.id %>">
+                            <%= render partial: 'questions/make_solved', locals: {question: question} %>
+                        </div>
+                        <%= question.body %>
+                        <%= image_tag question.image_url, size: "250x200" if question.image? %><br />
+                        
+                        <div id="likes_buttons_<%= question.id %>">
+                        <%= render partial: 'likes/like', locals: {question: question} %>
+                        </div>
+                        
+                        <%= link_to "詳細へ", question_path(question.id) %>
+                        <% if user_signed_in? && current_user.id == question.user_id %>
+                            <%= link_to "編集する", edit_question_path(question.id) %>
+                            <%= link_to "削除する", question_path(question.id), method: :delete %>
+                        <% end %>
+                        <br />
+                        <%= question.created_at.to_s(:datetime_jp) %>
+                    </div>
+                <% end %>
             </div>
-            <%= question.body %>
-            <%= image_tag question.image_url, size: "250x200" if question.image? %><br />
-            
-            <div id="likes_buttons_<%= question.id %>">
-            <%= render partial: 'likes/like', locals: {question: question} %>
-            </div>
-            
-            <%= link_to "詳細へ", question_path(question.id) %>
-            <% if user_signed_in? && current_user.id == question.user_id %>
-                <%= link_to "編集する", edit_question_path(question.id) %>
-                <%= link_to "削除する", question_path(question.id), method: :delete %>
-            <% end %>
-            <br />
-            <%= question.created_at.to_s(:datetime_jp) %>
+            <%= paginate @questions %>
         </div>
-    <% end %>
-</div>
 
-<%= paginate @questions %>
+        <div class="col-md-6">
 
-
-<h3>現在受講中の講義</h3>
-<div class="current-lectures-container">
-    <% @current_lectures.each do |l| %>
-        <% if current_user.id == l.user_id %>
-            <div class="current-lecture">
-                <%= l.lecture.name %>
-                <%= l.lecture.term %>
-                <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
+            <h3>現在受講中の講義</h3>
+            <div class="current-lectures-container">
+                <% @current_lectures.each do |l| %>
+                    <% if current_user.id == l.user_id %>
+                        <div class="current-lecture">
+                            <%= l.lecture.name %>
+                            <%= l.lecture.term %>
+                            <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
+                        </div>
+                    <% end %>
+                <% end %>
             </div>
-        <% end %>
-    <% end %>
-</div>
 
-<h3>過去に受講した講義</h3>
-<div class="past-lectures-container">
-    <% @past_lectures.each do |l| %>
-        <% if current_user.id == l.user_id %>
-            <div class="past-lecture">
-                <%= l.lecture.name %>
-                <%= l.lecture.grade %>年次
-                <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
+            <h3>過去に受講した講義</h3>
+            <div class="past-lectures-container">
+                <% @past_lectures.each do |l| %>
+                    <% if current_user.id == l.user_id %>
+                        <div class="past-lecture">
+                            <%= l.lecture.name %>
+                            <%= l.lecture.grade %>年次
+                            <%= link_to "詳細へ", lecture_path(l.lecture.id) %>
+                        </div>
+                    <% end %>
+                <% end %>
             </div>
-        <% end %>
-    <% end %>
+
+        </div>
+
+    </div>
+
 </div>

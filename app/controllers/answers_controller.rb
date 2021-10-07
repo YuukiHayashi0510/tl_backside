@@ -7,18 +7,17 @@ class AnswersController < ApplicationController
       answer.user_id = current_user.id
       if answer.save
         flash[:success] = "コメントしました"
-        redirect_back(fallback_location: root_path)
+        redirect_to request.referer
       else
         flash[:success] = "コメントできませんでした"
-        redirect_back(fallback_location: root_path)
+        redirect_to request.referer
       end
     end
 
     def destroy
-      answer = Answer.find_by(params[:id])
-      question = Question.find(params[:question_id])
+      answer = Answer.find(params[:id])
       answer.destroy
-      redirect_to question_path(question)
+      redirect_to request.referer
     end
     
   

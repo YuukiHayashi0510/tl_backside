@@ -9,43 +9,49 @@
   <%= link_to "編集する", edit_user_registration_path %>
 <% end %><br /><br />
 
-<h3>ユーザーの質問一覧</h3>
-<% @user.questions.order("updated_at DESC").each do |t| %>
-  <%= t.solved ? '解決済み' : '回答受付中' %>
-  <%= image_tag t.image_url, size: "150x100" if t.image? %><br />
-  <%= t.body %><br />
-  <%= t.updated_at.to_s(:datetime_jp) %>
-  <%= link_to "詳細へ", question_path(t.id) %>
-  <br />
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>ユーザーの質問一覧</h3>
+      <% @user.questions.order("updated_at DESC").each do |t| %>
+        <%= t.solved ? '解決済み' : '回答受付中' %>
+        <%= image_tag t.image_url, size: "150x100" if t.image? %><br />
+        <%= t.body %><br />
+        <%= t.updated_at.to_s(:datetime_jp) %>
+        <%= link_to "詳細へ", question_path(t.id) %>
+        <br />
+      <% end %>
 
-<h3>ユーザーの回答一覧</h3>
-<% @user.answers.order("updated_at DESC").each do |t| %>
-  <p>質問</p>
-  <%= t.question.user.name %><br />
-  <%= t.question.body  %><br>
-  <p>回答</p>
-  <%= t.body %><br />
-  <%= t.updated_at.to_s(:datetime_jp) %>
-  <br />
-<% end %>
+      <h3>ユーザーの回答一覧</h3>
+      <% @user.answers.order("updated_at DESC").each do |t| %>
+        <p>質問</p>
+        <%= t.question.user.name %><br />
+        <%= t.question.body  %><br>
+        <p>回答</p>
+        <%= t.body %><br />
+        <%= t.updated_at.to_s(:datetime_jp) %>
+        <br />
+      <% end %>
+    </div>
 
-<br />
-<h3>現在の講義一覧</h3>
-<p>科目名：担当教員名</p>
-<% @user.current_lectures.each do |t| %>
-  <%= t.lecture.name %> ： <%= t.lecture.teacher %> <%= t.lecture.term %><%= link_to "詳細へ", lecture_path(t.lecture.id) %>
-  <br />
-<% end %>
+    <div class="col-md-6">
+      <br />
+      <h3>現在の講義一覧</h3>
+      <p>科目名：担当教員名</p>
+      <% @user.current_lectures.each do |t| %>
+        <%= t.lecture.name %> ： <%= t.lecture.teacher %> <%= t.lecture.term %><%= link_to "詳細へ", lecture_path(t.lecture.id) %>
+        <br />
+      <% end %>
 
-<h3>過去の講義一覧</h3>
-<p>科目名：担当教員名</p>
-<% @user.past_lectures.each do |t| %>
-  <%= t.lecture.name %> ： <%= t.lecture.teacher %> <%= t.lecture.grade %>年次<%= link_to "詳細へ", lecture_path(t.lecture.id) %>
-  <br />
-<% end %>
-
-
+      <h3>過去の講義一覧</h3>
+      <p>科目名：担当教員名</p>
+      <% @user.past_lectures.each do |t| %>
+        <%= t.lecture.name %> ： <%= t.lecture.teacher %> <%= t.lecture.grade %>年次<%= link_to "詳細へ", lecture_path(t.lecture.id) %>
+        <br />
+      <% end %>
+      </div>
+  </div>
+</div>
 
 
 <%= link_to "質問一覧に戻る",top_index_path %>

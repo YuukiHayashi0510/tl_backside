@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resources :questions do
-    resource :answers, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
     member do
       put 'make_solved'

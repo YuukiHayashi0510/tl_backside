@@ -24,23 +24,13 @@
         <li><%= link_to "ログイン", new_user_session_path %></li>
       <% end %>
       <div class="header-list">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              メニュー
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <div class="dd-item">
-                  <a><%= link_to "トップ", top_index_path %></a>
+          <li>
                   <a><%= link_to "About", top_about_path %></a>
-              </div>
               <% if user_signed_in? %>
-                <div class="dd-item">
                   <a><%= link_to "講義一覧", lectures_path %></a>
                   <a><%= link_to "新しい質問", new_question_path %></a>
                   <a><%= link_to "マイページ", user_path(current_user.id) %></a>
-                </div>
               <% end %>
-            </div>
           </li>
       </div>
     </header>
