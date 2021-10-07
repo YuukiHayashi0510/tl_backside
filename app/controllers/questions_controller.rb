@@ -44,9 +44,7 @@ class QuestionsController < ApplicationController
     else
       @question.solved = false
     end
-    
     @question.update(bool_params)
-      flash[:notice] = "編集できました"
   end
 
   def destroy

@@ -11,6 +11,7 @@
 
 <h3>ユーザーの質問一覧</h3>
 <% @user.questions.order("updated_at DESC").each do |t| %>
+  <%= t.solved ? '解決済み' : '回答受付中' %>
   <%= image_tag t.image_url, size: "150x100" if t.image? %><br />
   <%= t.body %><br />
   <%= t.updated_at.to_s(:datetime_jp) %>
