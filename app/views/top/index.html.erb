@@ -12,40 +12,32 @@
 
 <h3>質問一覧</h3>
 <div class="questions-container">
-    <% @questions.order("created_at desc").each do |t| %>
+    <% @questions.order("created_at desc").each do |question| %>
         <div class="question">
-            <%= image_tag t.user.image_url,class:"rounded-circle", size: "40x40" if t.user.image? %> <%# アイコン表示 %>
-            <%= t.user.name %><br />
-            <% if user_signed_in? && current_user.id == t.user_id %>
-                <%= t.solved ? '解決済み' : '回答受付中' %>
-                <% if t.solved %>
-                    <%= link_to '回答受付中に戻す', make_solved_question_path(t.id, post: {solved: false}), method: :put %>
+            <%= image_tag question.user.image_url,class:"rounded-circle", size: "40x40" if question.user.image? %> <%# アイコン表示 %>
+            <%= question.user.name %><br />
+            <% if user_signed_in? && current_user.id == question.user_id %>
+                <%= question.solved ? '解決済み' : '回答受付中' %>
+                <% if question.solved %>
+                    <%= link_to '回答受付中に戻す', make_solved_question_path(question.id, post: {solved: false}), method: :put %>
                 <% else %>
-                    <%= link_to '解決済みにする', make_solved_question_path(t.id, post: {solved: true}), method: :put %>
+                    <%= link_to '解決済みにする', make_solved_question_path(question.id, post: {solved: true}), method: :put %>
                 <% end %>
             <% end %><br />
-            <%= t.body %>
-            <%= image_tag t.image_url, size: "250x200" if t.image? %><br />
-            <% if user_signed_in? %>
-                <% if current_user.already_liked?(t) %>
-                    <%= link_to question_like_path(id: t.id, question_id: t.id), method: :delete do %>
-                        <i class="fas fa-heart"></i><%= t.likes.count %>
-                    <% end %>
-                <% else %>
-                    <%= link_to question_likes_path(id: t.id, question_id: t.id), method: :post do %>
-                        <i class="fas fa-heart"></i><%= t.likes.count %>
-                    <% end %>
-                <% end %>
-            <% else %>
-                <i class="fas fa-heart"></i><%= t.likes.count %>
-            <% end %>
-            <%= link_to "詳細へ", question_path(t.id) %>
-            <% if user_signed_in? && current_user.id == t.user_id %>
-                <%= link_to "編集する", edit_question_path(t.id) %>
-                <%= link_to "削除する", question_path(t.id), method: :delete %>
+            <%= question.body %>
+            <%= image_tag question.image_url, size: "250x200" if question.image? %><br />
+            
+            <div id="likes_buttons_<%= question.id %>">
+            <%= render partial: 'likes/like', locals: {question: question} %>
+            </div>
+            
+            <%= link_to "詳細へ", question_path(question.id) %>
+            <% if user_signed_in? && current_user.id == question.user_id %>
+                <%= link_to "編集する", edit_question_path(question.id) %>
+                <%= link_to "削除する", question_path(question.id), method: :delete %>
             <% end %>
             <br />
-            <%= t.updated_at.to_s(:datetime_jp) %>
+            <%= question.created_at.to_s(:datetime_jp) %>
         </div>
     <% end %>
 </div>

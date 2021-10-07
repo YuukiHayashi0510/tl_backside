@@ -15,19 +15,9 @@
   <%= image_tag @question.image_url, size: "250x200" if @question.image? %>
   <p><%= @question.body %></p>
   <%= link_to "編集する", edit_question_path(@question.id) if current_user.id == @question.user_id %><br />
-  <% if user_signed_in? %>
-  <% if current_user.already_liked?(@question) %>
-    <%= link_to question_like_path(@question), method: :delete do %>
-      <i class="fas fa-heart"></i><%= @question.likes.count %>
-    <% end %>
-  <% else %>
-    <%= link_to question_likes_path(@question), method: :post do %>
-      <i class="fas fa-heart"></i><%= @question.likes.count %>
-    <% end %>
-  <% end %>
-<% else %>
-  <i class="fas fa-heart"></i><%= @question.likes.count %>
-<% end %>
+  <div id="likes_buttons_<%= @question.id %>">
+    <%= render partial: 'likes/like', locals: {question: @question} %>
+  </div>
   <p><%= @question.updated_at.to_s(:datetime_jp) %></p>
 </div>
 

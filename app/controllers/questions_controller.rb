@@ -32,6 +32,7 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # 解決済み機能
   def make_solved
     @question = Question.find(params[:id])
     
