@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'top/about'
   get 'top/index'
   
+  get 'questions/index' => 'questions#index'
   get 'questions/new' => 'questions#new'
   post 'questions/create' => 'questions#create'
   get 'questions/:id' => 'questions#show', as: 'question'
