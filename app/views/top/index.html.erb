@@ -16,14 +16,9 @@
         <div class="question">
             <%= image_tag question.user.image_url,class:"rounded-circle", size: "40x40" if question.user.image? %> <%# アイコン表示 %>
             <%= question.user.name %><br />
-            <% if user_signed_in? && current_user.id == question.user_id %>
-                <%= question.solved ? '解決済み' : '回答受付中' %>
-                <% if question.solved %>
-                    <%= link_to '回答受付中に戻す', make_solved_question_path(question.id, post: {solved: false}), method: :put %>
-                <% else %>
-                    <%= link_to '解決済みにする', make_solved_question_path(question.id, post: {solved: true}), method: :put %>
-                <% end %>
-            <% end %><br />
+            <div id="solve_buttons_<%= question.id %>">
+                <%= render partial: 'questions/make_solved', locals: {question: question} %>
+            </div>
             <%= question.body %>
             <%= image_tag question.image_url, size: "250x200" if question.image? %><br />
             

@@ -1,14 +1,9 @@
 <h1>Questions#show</h1>
 <p>Find me in app/views/questions/show.html.erb</p>
 
-<%= @question.solved ? '解決済み' : '回答受付中' %>
-<% if user_signed_in? && current_user.id == @question.user_id %>
-  <% if @question.solved %>
-    <%= link_to '回答受付中に戻す', make_solved_question_path(@question.id, post: {solved: false}), method: :put %>
-  <% else %>
-    <%= link_to '解決済みにする', make_solved_question_path(@question.id, post: {solved: true}), method: :put %>
-  <% end %>
-<% end %>
+<div id="solve_buttons_<%= @question.id %>">
+  <%= render partial: 'questions/make_solved', locals: {question: @question} %>
+</div>
 
 <h3>質問の詳細</h3>
 <div class="question">
@@ -33,8 +28,10 @@
     </div>
       <br>
   <% end %>
-
+</div>
+<div class="answer-form">
   <% if user_signed_in? && @question.solved == false %>
+  <p>回答の投稿</p>
     <%= form_with(model: [@question,@answer], local: true) do |f| %>
       <%= f.text_area :body %>
       <%= button_tag type: "submit" do %>
@@ -43,6 +40,7 @@
     <% end %>
   <% end %>
 </div>
+
 
 
 <h2>いいねしたユーザー</h2>

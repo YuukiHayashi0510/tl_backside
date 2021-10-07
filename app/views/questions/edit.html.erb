@@ -2,8 +2,12 @@
 <p>Find me in app/views/questions/edit.html.erb</p>
 
 <%= form_for @question do |f| %>
-    <%= f.label :body %>
+    <%= f.label :質問内容 %>
     <%= f.text_field :body, :size => 140 %> <br />
+    <p>現在の画像</p>
+    <%= image_tag @question.image_url, size: "250x200" if @question.image? %><br />
+    <%= f.label :画像 %>
+    <%= f.file_field :image %><br />
     <%= f.submit "編集する" %>
 <% end %>
 <%= link_to "質問一覧に戻る", top_index_path %>

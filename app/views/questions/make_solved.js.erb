@@ -1,0 +1,1 @@
+$('#solve_buttons_<%= @question.id %>').html("<%= j(render partial: 'questions/make_solved', locals: {question: @question}) %>");

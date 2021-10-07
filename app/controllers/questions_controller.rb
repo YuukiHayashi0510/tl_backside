@@ -1,5 +1,8 @@
 class QuestionsController < ApplicationController
 
+
+  before_action :solve_params
+
   def new
     @question = Question.new
   end
@@ -42,12 +45,8 @@ class QuestionsController < ApplicationController
       @question.solved = false
     end
     
-    if @question.update(bool_params)
+    @question.update(bool_params)
       flash[:notice] = "編集できました"
-      redirect_to request.referer
-    else
-      redirect_to request.referer
-    end
   end
 
   def destroy
@@ -70,5 +69,9 @@ class QuestionsController < ApplicationController
   def bool_params
     params.permit(:question,:solved)
   end
+
+  def solve_params
+    @question = Question.find(params[:id])
+  end 
 
 end
