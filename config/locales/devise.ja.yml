@@ -27,8 +27,6 @@ ja:
         updated_at: 更新日
     models:
       user: ユーザー
-      email: Eメール
-      name: 名前
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
