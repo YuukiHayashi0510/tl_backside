@@ -18,7 +18,7 @@ Rails.application.configure do
 
 config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'tlbackside.herokuapp.com'}
+  config.action_mailer.default_url_options = { host: 'https://tlbackside.herokuapp.com'}
 
   config.action_mailer.perform_deliveries = true
 
