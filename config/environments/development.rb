@@ -42,9 +42,9 @@ Rails.application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     :domain => 'smtp.gmail.com',
-    :user_name => "Yuki.Hayashi.alias@gmail.com", #gmailアドレス
-    :password => "alias0510", #gmailパスワード
-    :authentication => 'login',
+    user_name: Rails.application.credentials.gmail[:user_name],
+    password: Rails.application.credentials.gmail[:password],
+    authentication: :login,
   }
 
   config.action_mailer.raise_delivery_errors = false
