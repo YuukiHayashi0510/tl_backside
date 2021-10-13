@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   get 'past_lectures/create'
   get 'past_lectures/destroy'
   get 'current_lectures/create'
