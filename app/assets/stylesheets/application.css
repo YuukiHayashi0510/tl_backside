@@ -19,6 +19,10 @@
     margin: 0;
 }
 
+header {
+    color: #428BCA;
+}
+
 header li {
     list-style: none;
 }
