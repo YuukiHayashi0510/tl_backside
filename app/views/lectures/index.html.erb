@@ -1,6 +1,4 @@
-<h1>Lectures#index</h1>
-<p>Find me in app/views/lectures/index.html.erb</p>
-<p>講義一覧ページ</p>
+<h1>講義一覧</h1>
 <p>科目名：担当教員名</p>
 <% @lectures.order(:grade).order(:term).each do |t| %>
     <%= t.name %>：

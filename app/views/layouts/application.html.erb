@@ -31,9 +31,6 @@
                 <a class="nav-link"><%= link_to "ログイン", new_user_session_path,class: "nav-custom" %></a>
               </li>
             <% end %>
-            <li class="nav-item">
-              <a class="nav-link"><%= link_to "About", top_about_path,class: "nav-custom" %></a>
-            </li>
             <% if user_signed_in? %>
             <li class="nav-item">
               <a class="nav-link"><%= link_to "講義一覧", lectures_path,class: "nav-custom" %></a>

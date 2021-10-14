@@ -6,15 +6,11 @@ question/index.html.erb
 <div class="question-ranking">
     <% @questions.each do |question| %>
         <div class="question">
+        <% if question.solved==true %>
             <%#= ランキングの数字  %>
-            <%= i %>
-            
+            <button type="button" class="btn btn-warning"><%= i %></button>
             <%= image_tag question.user.image_url,class:"rounded-circle", size: "40x40" if question.user.image? %> <%# アイコン表示 %>
             <%= question.user.name %><br />
-
-            <div id="solve_buttons_<%= question.id %>">
-                <%= render partial: 'questions/make_solved', locals: {question: question} %>
-            </div>
 
             <%= question.body %>
             <%= image_tag question.image_url, size: "250x200" if question.image? %><br />
@@ -30,6 +26,9 @@ question/index.html.erb
             <%= question.created_at.to_s(:datetime_jp) %>
             <%#= ランキングの数字、質問が変わる度に＋1 %>
             <% i+=1 %>
+            
+            <% end %>
+            
         </div>
     <% end %>
     </ol>
