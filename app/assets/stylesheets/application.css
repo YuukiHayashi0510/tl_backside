@@ -19,28 +19,21 @@
     margin: 0;
 }
 
-header {
-    color: #428BCA;
-}
-
 header li {
+    display: flex;
     list-style: none;
 }
 
-.dd-item a {
-    text-decoration:none;
-    display: block;
-    width: 100%;
-    padding: 1.0px 1.5rem;
-    clear: both;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
-    border: 0;
+.navbar-nav {
+    margin: 0 0 0 auto;
 }
 
-.dd-item a:hover {
-    background-color: rgba(0, 0, 0, 0.020);
+/* link_toの下線消しと色づけ */
+.nav-custom {
+    text-decoration: none;
+    color:azure;
+}
+
+header {
+    background-color: #428BCA;
 }

@@ -7,8 +7,6 @@
     <%= csp_meta_tag %>
     <%# Bootstrap CSS適用文 %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
-    <%# おわり %>
     <%# FontAwesome 適用文 %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -17,22 +15,39 @@
 
   <body>
     <header>
-      <h1><%= link_to "TL-BackSide", top_index_path %></h1>
-      <% if user_signed_in? %>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"} %></li>
-      <% else %>
-        <li><%= link_to "ログイン", new_user_session_path %></li>
-      <% end %>
-      <div class="header-list">
-          <li>
-                  <a><%= link_to "About", top_about_path %></a>
-              <% if user_signed_in? %>
-                  <a><%= link_to "講義一覧", lectures_path %></a>
-                  <a><%= link_to "新しい質問", new_question_path %></a>
-                  <a><%= link_to "マイページ", user_path(current_user.id) %></a>
-              <% end %>
-          </li>
-      </div>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <h1 class="navbar-brand"><%= link_to "TL-BackSide", top_index_path,class: "nav-custom" %></h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"},class: "nav-custom" %></a>
+            </li>
+            <% else %>
+              <li class="nav-item">
+                <a class="nav-link"><%= link_to "ログイン", new_user_session_path,class: "nav-custom" %></a>
+              </li>
+            <% end %>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "About", top_about_path,class: "nav-custom" %></a>
+            </li>
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "講義一覧", lectures_path,class: "nav-custom" %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "新しい質問", new_question_path,class: "nav-custom" %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "マイページ", user_path(current_user.id),class: "nav-custom" %></a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </nav>
     </header>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
