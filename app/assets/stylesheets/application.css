@@ -34,6 +34,12 @@ header li {
     color:azure;
 }
 
+.nav-custom:hover {
+    text-decoration: none;
+    color: #C8CBDE;
+}
+/* 終わり */
+
 header {
-    background-color: #428BCA;
+    background-color: #0457CC;
 }
