@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+/* --------- top/index.html -----------------------  */
+/*--質問一覧のCSS--*/
+// 枠作り
 .questions-container {
     padding: 0.5em 1em;
     color: #5d627b;
@@ -9,16 +13,20 @@
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
 
+// 触った時に少し灰色にする
 .question:hover {
     background-color: #f5f5f5;
 }
 
+/*--検索フォームのCSS--*/
+// フォームの改行消しと背景色、角取り
 .search-form {
     display: inline-block;
     background-color: #eaeaee;
     border-radius: 20px;
 }
 
+// 検索のtext_field_tagの角取り、枠消し、背景色の統一
 #search-field {
     background-color: #eaeaee;
     border: none;
@@ -26,8 +34,23 @@
     border-bottom-right-radius: 20px;
 }
 
-#search-field:focus {
+// 検索フィールドの枠消し
+#search-field:focus { // 検索フィールドに入力しようとするとき=>focus 
     border: none;
     outline: none;
-    
 }
+
+/*--現在の講義一覧--*/
+
+.lecture-link {
+    text-decoration: none;
+    color: black;
+}
+
+.lecture-link:hover {
+    text-decoration: none;
+    color: #CC1504;
+}
+
+
+/* --------- top/about.html -----------------------  */

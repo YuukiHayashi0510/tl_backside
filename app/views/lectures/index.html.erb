@@ -1,28 +1,25 @@
 <h1>講義一覧</h1>
 <p>科目名：担当教員名</p>
-<% @lectures.order(:grade).order(:term).each do |t| %>
-    <%= t.name %>：
-    <%= t.teacher %>
-    <%= t.term %>
-    <%= link_to "詳細へ", lecture_path(t.id) %>
+<% @lectures.order(:grade).order(:term).each do |l| %>
+    <%= link_to "#{l.name} #{l.teacher} #{l.term}", lecture_path(l.id) %>
     <br />
     <% if user_signed_in? %>
 
-        <% if current_user.already_current_registered?(t) %>
-            <%= link_to lecture_current_lectures_path(t), method: :delete do %>
+        <% if current_user.already_current_registered?(l) %>
+            <%= link_to lecture_current_lectures_path(l), method: :delete do %>
             現在の講義を取り消す
             <% end %>
         <% else %>
 
-            <% if current_user.already_past_registered?(t) %>
-                <%= link_to lecture_past_lectures_path(t), method: :delete do %>
+            <% if current_user.already_past_registered?(l) %>
+                <%= link_to lecture_past_lectures_path(l), method: :delete do %>
                 過去の講義を取り消す
                 <% end %>
             <% else %>
-                <%= link_to lecture_current_lectures_path(t), method: :post do %>
+                <%= link_to lecture_current_lectures_path(l), method: :post do %>
                     現在の講義に登録
                 <% end %>
-                <%= link_to lecture_past_lectures_path(t), method: :post do %>
+                <%= link_to lecture_past_lectures_path(l), method: :post do %>
                     過去の講義に登録
                 <% end %>
             <% end %>

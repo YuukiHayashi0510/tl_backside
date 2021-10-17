@@ -1,4 +1,4 @@
-    <%= question.solved ? '解決済み' : '回答受付中' %>
+<%= question.solved ? '解決済み' : '回答受付中' %>
 <% if user_signed_in? && current_user.id == question.user_id %>
     <% if question.solved %>
         <%= link_to '回答受付中に戻す', make_solved_question_path(question.id, post: {solved: false}), method: :put, remote: true %>
