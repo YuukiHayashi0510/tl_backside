@@ -1,8 +1,22 @@
-<%= question.solved ? '解決済み' : '回答受付中' %>
+<% if question.solved == true %>
+    <span class="badge badge-primary">解決済み</span>
+<% else %>
+    <span class="badge badge-success">回答受付中</span>
+<% end %>
+
 <% if user_signed_in? && current_user.id == question.user_id %>
     <% if question.solved %>
-        <%= link_to '回答受付中に戻す', make_solved_question_path(question.id, post: {solved: false}), method: :put, remote: true %>
+        <%= link_to '回答受付中に戻す', make_solved_question_path(question.id, post: {solved: false}), method: :put, remote: true, class: "solve-btn" %>
     <% else %>
-        <%= link_to '解決済みにする', make_solved_question_path(question.id, post: {solved: true}), method: :put, remote: true %>
+        <%= link_to '解決済みにする', make_solved_question_path(question.id, post: {solved: true}), method: :put, remote: true, class: "solve-btn" %>
     <% end %>
 <% end %><br />
+
+<style>
+
+.solve-btn:hover {
+    text-decoration: none;
+    color: #CC1504;
+}
+
+</style>

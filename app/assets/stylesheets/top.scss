@@ -11,12 +11,23 @@
     color: #5d627b;
     background: white;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-    overflow: scroll;
+}
+
+.detail-li:hover{
+    text-decoration: none;
+}
+
+.q-box h3{
+    text-align: center;
 }
 
 // 触った時に少し灰色にする
 .question:hover {
     background-color: #f5f5f5;
+}
+
+.search-box {
+    text-align: center;
 }
 
 /*--検索フォームのCSS--*/
@@ -25,6 +36,7 @@
     display: inline-block;
     background-color: #eaeaee;
     border-radius: 20px;
+    font-size: 120%;
 }
 
 // 検索のtext_field_tagの角取り、枠消し、背景色の統一
@@ -41,7 +53,20 @@
     outline: none;
 }
 
-/*--現在の講義一覧--*/
+/*--講義一覧--*/
+
+.lectures-container {
+    padding: 1em 0em 1em 1em;
+    margin: 2em 0em 2em 2em;
+    font-weight: bold;
+    color: #0F3E80;/*文字色*/
+    background: #FFF;
+    border: solid 2px #0F3E80;/*線*/
+    border-radius: 5px;/*角の丸み*/
+    background-color: #dde4ee;
+    width:85%;
+    
+}
 
 .lecture-link {
     text-decoration: none;
@@ -50,8 +75,11 @@
 
 .lecture-link:hover {
     text-decoration: none;
-    color: #CC1504;
+    color: #CC2C18;
 }
 
+.current-lectures-container {
+    margin-bottom: 10%;
+}
 
 /* --------- top/about.html -----------------------  */

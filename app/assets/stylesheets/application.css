@@ -19,11 +19,24 @@
     margin: 0;
 }
 
+/*------ヘッダー操作------*/
+
+/*ページと共に動くヘッダー*/
+header {
+    width: 100%; /* 幅はマックス*/
+    top: 0; /*　常にページ上部に固定　*/
+    z-index: 1; /* bodyとheaderの重なり*/
+    position: fixed; /*headerの固定*/
+    background-color: #0457CC;
+}
+
+/* ヘッダーのリストの並びを整える */
 header li {
     display: flex;
     list-style: none;
 }
 
+/* リストを右に寄せる */
 .navbar-nav {
     margin: 0 0 0 auto;
 }
@@ -34,12 +47,30 @@ header li {
     color:azure;
 }
 
+/* 触れた時の色と下線消し */
 .nav-custom:hover {
     text-decoration: none;
     color: #C8CBDE;
 }
 /* 終わり */
 
-header {
-    background-color: #0457CC;
+/*------body操作------*/
+
+/*headerとbodyの重なり*/
+body {
+    margin-top: 5%; /* 重なりを意識したmargin */
+    z-index: auto;
+    font-family: 'Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック','Yu Gothic','メイリオ', 'Meiryo','ＭＳ Ｐゴシック','MS PGothic';
+}
+
+body h1{
+    cursor: default;
+}
+
+body h2{
+    cursor: default;
+}
+
+body h3{
+    cursor: default;
 }

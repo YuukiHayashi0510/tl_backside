@@ -2,10 +2,10 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="box row">
 
-        <div class="col-md-8">
-            <h3>質問</h3>
+        <div class="q-box col-md-8">
+            <h3>質問一覧</h3>
             <div class="questions-container">
                 <% @questions.order("created_at desc").each do |question| %>
                     <div class="question">
@@ -14,21 +14,25 @@
                         <div id="solve_buttons_<%= question.id %>">
                             <%= render partial: 'questions/make_solved', locals: {question: question} %>
                         </div>
-                        <%= question.body %>
-                        <%= image_tag question.image_url, size: "250x200" if question.image? %><br />
-                        
+                        <div>
+                            <%= safe_join(question.body.split("\n"),tag(:br)) %>
+                        </div>
+                        <div>
+                            <%= image_tag question.image_url, size: "250x200" if question.image? %><br />
+                        </div>
+
                         <div id="likes_buttons_<%= question.id %>">
                             <%= render partial: 'likes/like', locals: {question: question} %>
                         </div>
                         
-                        <%= link_to question_path(question.id) do %>
+                        <%= link_to question_path(question.id), class: "detail-li" do %>
                             <i class="fas fa-info-circle">詳細</i>
                         <% end %>
                         <% if user_signed_in? && current_user.id == question.user_id %>
-                            <%= link_to edit_question_path(question.id), class: "q-edit" do %>
+                            <%= link_to edit_question_path(question.id), class: "detail-li" do %>
                                 <i class="fas fa-pen">編集</i>
                             <% end %>
-                            <%= link_to question_path(question.id), method: :delete do %>
+                            <%= link_to question_path(question.id), method: :delete, class: "detail-li" do %>
                                 <i class="fas fa-trash-alt">削除</i>
                             <% end %>
                         <% end %>
@@ -41,36 +45,40 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="sub-box col-md-4">
             <%= link_to "質問ランキング", questions_index_path %><br />
 
+            <div class="search-box">
             <div class="search-form">
                 <%= form_tag({controller:"top",action:"index"}, method: :get) do %>
                     <i class="fas fa-search"></i>
                     <%= text_field_tag :search, "",placeholder: "キーワード検索", id: "search-field" %>
                 <% end %>
             </div>
-
-            <h3>現在受講中の講義</h3>
-            <div class="current-lectures-container">
-                <% @current_lectures.each do |l| %>
-                    <% if current_user.id == l.user_id %>
-                        <div class="current-lecture">
-                            <%= link_to "#{l.lecture.name} #{l.lecture.term}", lecture_path(l.lecture.id), class: "lecture-link" %>
-                        </div>
-                    <% end %>
-                <% end %>
             </div>
 
-            <h3>過去に受講した講義</h3>
-            <div class="past-lectures-container">
-                <% @past_lectures.each do |l| %>
-                    <% if current_user.id == l.user_id %>
-                        <div class="past-lecture">
-                            <%= link_to "#{l.lecture.name} #{l.lecture.grade}年次", lecture_path(l.lecture.id), class: "lecture-link"  %>
-                        </div>
+            <div class="lectures-container">
+                <h3>現在受講中の講義</h3>
+                <div class="current-lectures-container">
+                    <% @current_lectures.each do |l| %>
+                        <% if current_user.id == l.user_id %>
+                            <div class="current-lecture">
+                                <%= link_to "#{l.lecture.name} #{l.lecture.term}", lecture_path(l.lecture.id), class: "lecture-link" %>
+                            </div>
+                        <% end %>
                     <% end %>
-                <% end %>
+                </div>
+
+                <h3>過去に受講した講義</h3>
+                <div class="past-lectures-container">
+                    <% @past_lectures.each do |l| %>
+                        <% if current_user.id == l.user_id %>
+                            <div class="past-lecture">
+                                <%= link_to "#{l.lecture.name} #{l.lecture.grade}年次", lecture_path(l.lecture.id), class: "lecture-link"  %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
             </div>
 
         </div>
