@@ -23,39 +23,48 @@ const validation = () => {
 window.addEventListener("keydown", validation)
 </script>
 
-<h2>新規登録</h2>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <div class="field">
-    <%= f.label :ユーザーネーム %><br />
-    <%= f.text_field :name, autofocus: true, class: "form-control form-control-sm", id: "name-key" %>
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <%= image_tag 'college.jpg',size: '100%x100%' %>
+    </div>
+    <div class="col-md-7 col-sm-12">
+      <h2>新規登録</h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <div class="field">
+          <%= f.label :ユーザーネーム %><br />
+          <%= f.text_field :name, autofocus: true, class: "form-control", id: "name-key" %>
+        </div>
 
-  <div id="name-error" class="name-error">ユーザーネームは半角英数字で入力してください</div>
+        <div id="name-error" class="name-error">ユーザーネームは半角英数字で入力してください</div>
 
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm", required: true %>
-  </div>
+        <div class="field">
+          <%= f.label :メールアドレス %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
+        </div>
 
-  <div class="field">
-    <%= f.label :トップ画像 %>
-    <%= f.file_field :image %>
-  </div>
+        <div class="image-field">
+          <%= f.label :トップ画像 %>
+          <%= f.file_field :image %>
+        </div>
 
-  <div class="field">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
-    <em>最低<%= @minimum_password_length %>文字</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm", required: true %>
+        <div class="field">
+          <%= f.label :パスワード %>
+          <% if @minimum_password_length %>
+          <em>最低<%= @minimum_password_length %>文字</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control", required: true %>
+        </div>
+        <div class="field">
+          <%= f.label :パスワードの確認 %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", required: true %>
+        </div>
+        <div class="actions">
+          <%= f.submit "新規登録",class:"btn btn-outline-primary" %>
+        </div>
+      <% end %>
+      <%= render "users/shared/links" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :パスワードの確認 %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm", required: true %>
-  </div>
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-<%= render "users/shared/links" %>
+</div>

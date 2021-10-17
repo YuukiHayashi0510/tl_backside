@@ -1,67 +1,70 @@
 <h3>講義詳細ページ</h3>
 
-<div class="lecture">
-  <p><%= @lecture.name %>
-  <%= @lecture.teacher %>
-  <%= @lecture.grade %>年次
-  <%= @lecture.term %></p>
-</div>
+<div class="container">
+  <div class="title row">
+    <p><%= @lecture.name %>
+    <%= @lecture.teacher %>
+    <%= @lecture.grade %>年次
+    <%= @lecture.term %></p>
 
-<% if current_user.already_current_registered?(@lecture) %>
-    <%= link_to lecture_current_lectures_path(@lecture), method: :delete do %>
-    現在の講義を取り消す
+  <% if current_user.already_current_registered?(@lecture) %>
+    <%= link_to lecture_current_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
+      現在の講義を取り消す
     <% end %>
-
-<% else %>
-  <% if current_user.already_past_registered?(@lecture) %>
-    <%= link_to lecture_past_lectures_path(@lecture), method: :delete do %>
-      過去の講義を取り消す
-    <% end %>
-
   <% else %>
-    <%= link_to lecture_current_lectures_path(@lecture), method: :post do %>
-      現在の講義に登録
-    <% end %>
-    <%= link_to lecture_past_lectures_path(@lecture), method: :post do %>
-      過去の講義に登録
-    <% end %>
-  <% end %>
-<% end %><br />
-
-<%= link_to "評価", evaluations_index_path(@lecture.id) %><br />
-
-<div class="pdf-wrapper">
-  <h3>過去問PDF</h3>
-  <object data="<%= @lecture.pdf.url %>" type="application/pdf" width="400" height="600"></object>
-  <%= form_with(model: [@lecture], local: true) do |f| %>
-    <%= f.label :pdf %>
-    <%= f.file_field :pdf %>
-    <%= button_tag type: "submit" do %>
-      送信する
-    <% end %>
-  <% end %>
-</div>
-
-<div class="comment-wrapper">
-  <h3>コメント一覧</h3>
-  <% @comments.each do |c| %>
-    <div>
-      <%= c.user.name unless c.user.blank? %>
-      <br>
-      <%= c.body %>
-      <%= link_to "削除する", lecture_comment_path(@lecture.id, c.id), method: :delete %>
-    </div>
-      <br>
-  <% end %>
-
-  <% if user_signed_in? %>
-    <%= form_with(model: [@lecture, @comment], local: true) do |f| %>
-      <%= f.text_area :body %>
-      <%= button_tag type: "submit" do %>
-<i class="far fa-comments"></i> コメントする
+    <% if current_user.already_past_registered?(@lecture) %>
+      <%= link_to lecture_past_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
+        過去の講義を取り消す
+      <% end %>
+    <% else %>
+      <%= link_to lecture_current_lectures_path(@lecture), method: :post, class:"btn btn-success" do %>
+        現在の講義に登録
+      <% end %>
+      <%= link_to lecture_past_lectures_path(@lecture), method: :post, class:"btn btn-secondary" do %>
+        過去の講義に登録
       <% end %>
     <% end %>
-  <% end %>
-</div>
+  <% end %><br />
 
-<%= link_to "講義一覧に戻る", lectures_path %>
+  </div>
+
+
+
+  <%= link_to "評価", evaluations_index_path(@lecture.id) %><br />
+
+  <div class="pdf-wrapper">
+    <h3>過去問PDF</h3>
+    <object data="<%= @lecture.pdf.url %>" type="application/pdf" width="400" height="600"></object>
+    <%= form_with(model: [@lecture], local: true) do |f| %>
+      <%= f.label :pdf %>
+      <%= f.file_field :pdf %>
+      <%= button_tag type: "submit" do %>
+        送信する
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="comment-wrapper">
+    <h3>コメント一覧</h3>
+    <% @comments.each do |c| %>
+      <div>
+        <%= c.user.name unless c.user.blank? %>
+        <br>
+        <%= c.body %>
+        <%= link_to "削除する", lecture_comment_path(@lecture.id, c.id), method: :delete %>
+      </div>
+        <br>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with(model: [@lecture, @comment], local: true) do |f| %>
+        <%= f.text_area :body %>
+        <%= button_tag type: "submit" do %>
+  <i class="far fa-comments"></i> コメントする
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= link_to "講義一覧に戻る", lectures_path %>
+</div>

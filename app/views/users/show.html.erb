@@ -30,14 +30,6 @@
         <br />
       <% end %>
 
-      <br />
-      <h3>現在の講義一覧</h3>
-      <p>科目名：担当教員名</p>
-      <% @user.current_lectures.each do |t| %>
-        <%= t.lecture.name %> ： <%= t.lecture.teacher %> <%= t.lecture.term %><%= link_to "詳細へ", lecture_path(t.lecture.id) %>
-        <br />
-      <% end %>
-
     </div>
 
     <div class="col-md-6">
@@ -53,12 +45,25 @@
       <% end %>
 
 
+
+      </div>
+  </div>
+  <div class="lecture-container row">
+    <div class="current-lecture-container col-md-6">
+      <h3>現在の講義一覧</h3>
+      <p>科目名：担当教員名</p>
+      <% @user.current_lectures.each do |t| %>
+        <%= t.lecture.name %> ： <%= t.lecture.teacher %> <%= t.lecture.term %><%= link_to "詳細へ", lecture_path(t.lecture.id) %>
+        <br />
+      <% end %>
+    </div>
+    <div class="past-lecture-container col-md-6">
       <h3>過去の講義一覧</h3>
       <p>科目名：担当教員名</p>
       <% @user.past_lectures.each do |t| %>
         <%= t.lecture.name %> ： <%= t.lecture.teacher %> <%= t.lecture.grade %>年次<%= link_to "詳細へ", lecture_path(t.lecture.id) %>
         <br />
       <% end %>
-      </div>
+    </div>
   </div>
 </div>
