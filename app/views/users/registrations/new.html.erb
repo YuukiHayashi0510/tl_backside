@@ -1,13 +1,41 @@
+<%# jsの記述、リアルタイムバリデーションチェック %>
+<script>
+const validation = () => {
+  // :nameエラー実装
+    // 半角英数記号以外にマッチ
+    const namePattern = /^[a-zA-Z0-9!-/:-@¥[-`{-~]+$/;
+    // エラーメッセージ
+    const nameErrorMessage = document.getElementById("name-error");
+    // フォームの要素
+    const nameKey = document.getElementById("name-key");
+
+    addEventListener("keyup", e => {
+        if ( namePattern.test(nameKey.value) || nameKey.value == "" ) {
+          // loginKeyの内容が指定通りor空白のとき、エラーメッセージを表示しない
+          nameErrorMessage.style.visibility = "hidden";
+        }
+        else {
+            nameErrorMessage.style.visibility = "visible";
+        }
+    })
+}
+
+window.addEventListener("keydown", validation)
+</script>
+
 <h2>新規登録</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
   <div class="field">
     <%= f.label :ユーザーネーム %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.text_field :name, autofocus: true, class: "form-control form-control-sm", id: "name-key" %>
   </div>
+
+  <div id="name-error" class="name-error">ユーザーネームは半角英数字で入力してください</div>
+
   <div class="field">
     <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm", required: true %>
   </div>
 
   <div class="field">
@@ -20,11 +48,11 @@
     <% if @minimum_password_length %>
     <em>最低<%= @minimum_password_length %>文字</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm", required: true %>
   </div>
   <div class="field">
     <%= f.label :パスワードの確認 %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm", required: true %>
   </div>
   <div class="actions">
     <%= f.submit "新規登録" %>

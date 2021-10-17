@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :name,
   presence: true, uniqueness: { case_sensitive: :false },
   length: { minimum: 4, maximum: 20 }, 
-  format: { with: /\A[a-z0-9]+\z/, message: "ユーザー名は半角英数字です"}
+  format: { with: /\A[a-zA-Z0-9]+\z/, message: "ユーザー名は半角英数字です"}
   validates :profile, length: { maximum: 200 }
 
   has_many :questions, dependent: :destroy

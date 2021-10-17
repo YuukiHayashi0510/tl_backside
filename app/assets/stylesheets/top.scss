@@ -1,3 +1,33 @@
 // Place all the styles related to the top controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.questions-container {
+    padding: 0.5em 1em;
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.question:hover {
+    background-color: #f5f5f5;
+}
+
+.search-form {
+    display: inline-block;
+    background-color: #eaeaee;
+    border-radius: 20px;
+}
+
+#search-field {
+    background-color: #eaeaee;
+    border: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#search-field:focus {
+    border: none;
+    outline: none;
+    
+}
