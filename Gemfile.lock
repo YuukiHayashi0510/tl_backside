@@ -185,6 +185,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails_same_site_cookie (0.1.9)
+      rack (>= 1.5)
+      user_agent_parser (~> 2.6)
     railties (6.1.4.1)
       actionpack (= 6.1.4.1)
       activesupport (= 6.1.4.1)
@@ -238,6 +241,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8-x64-mingw32)
+    user_agent_parser (2.7.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -280,6 +284,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
+  rails_same_site_cookie
   sass-rails (>= 6)
   selenium-webdriver
   sqlite3
