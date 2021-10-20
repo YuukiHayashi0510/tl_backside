@@ -34,7 +34,7 @@
 
   <div class="pdf-wrapper">
     <h3>過去問PDF</h3>
-    <object data="<%= @lecture.pdf.url if @lecture.pdf.blank? %>" type="application/pdf"></object>
+    <object data="<%= image_url @lecture.pdf.url unless @lecture.pdf_url.blank? %>" type="application/pdf"></object>
 
     <%= form_with(model: [@lecture], local: true) do |f| %>
       <%= f.label :pdf %>
