@@ -3,6 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_dispatch.cookies_same_site_protection = :none
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -16,7 +17,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-config.action_mailer.perform_caching = false
+  config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = { host: 'https://tlbackside.herokuapp.com'}
 
