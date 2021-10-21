@@ -13,9 +13,9 @@ class LecturesController < ApplicationController
   def update
     lecture = Lecture.find(params[:id])
       if lecture.update(lecture_params)
-        redirect_to :action => "show"
+        redirect_to request.referer
       else
-        redirect_to :action => "show"
+        redirect_to request.referer
       end
   end
 
