@@ -2,7 +2,7 @@
 <p>科目名：担当教員名</p>
 <% @lectures.order(:grade).order(:term).each do |l| %>
 <div class="lec-container">
-    <%= link_to "#{l.name} #{l.teacher} #{l.term}", lecture_path(l.id), class: "lec-content" %>
+    <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
     <br />
     <% if user_signed_in? %>
 

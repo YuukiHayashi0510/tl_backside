@@ -34,7 +34,7 @@
 
   <div class="pdf-wrapper">
     <h3>過去問PDF</h3>
-    <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf)%>
+    <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf) unless @lecture.pdf.blank?%>
 
     <%= form_with(model: [@lecture], local: true) do |f| %>
       <%= f.label :pdf %>
