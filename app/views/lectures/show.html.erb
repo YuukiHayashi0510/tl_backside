@@ -34,11 +34,11 @@
 
   <div class="pdf-wrapper">
     <h3>過去問PDF</h3>
-    <%= link_to "#{@lecture.pdf}", @lecture.pdf_url%>
+    <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf)%>
 
     <%= form_with(model: [@lecture], local: true) do |f| %>
       <%= f.label :pdf %>
-      <%= f.file_field :pdf %>
+      <%= f.file_field :pdf %><br />
       <%= button_tag type: "submit" do %>
         送信する
       <% end %>
