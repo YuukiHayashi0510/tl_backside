@@ -1,0 +1,67 @@
+.pro-box {
+    padding-left: 0;
+}
+
+.profile {
+    padding: 0.5em 1em;
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.edit-li:hover {
+    color: #CC2C18;
+    text-decoration: none;
+}
+
+.questions {
+    padding: 0.5em 1em;
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.question-box:hover {
+    background-color: #f5f5f5;
+}
+
+.answers {
+    padding: 0.5em 1em;
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.answer-box:hover {
+    background-color: #f5f5f5;
+}
+
+.lecture-li {
+    color: black;
+}
+
+.lecture-li:hover {
+    color: #CC2C18;
+    text-decoration: none;
+}
+
+.qa-box {
+    padding-top: 4%;
+}
+
+.lecture-box {
+    padding-top: 4%;
+    padding-left: 0;
+}
+
+.c-lecture {
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.p-lecture {
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
