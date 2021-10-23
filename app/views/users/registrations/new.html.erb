@@ -34,7 +34,7 @@ window.addEventListener("keydown", validation)
         <%= render "users/shared/error_messages", resource: resource %>
         <div class="field">
           <%= f.label :ユーザーネーム %><br />
-          <%= f.text_field :name, autofocus: true, class: "form-control", id: "name-key" %>
+          <%= f.text_field :name, autofocus: true, class: "form-control", id: "name-key", required: true %>
         </div>
 
         <div id="name-error" class="name-error">ユーザーネームは半角英数字で入力してください</div>

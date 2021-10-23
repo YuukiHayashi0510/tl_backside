@@ -53,7 +53,10 @@
           <div class="answer-box">
             <%= t.body %><br />
             <%= link_to question_path(t.question.id), class: "detail-li" do %>
-              <i class="fas fa-info-circle">詳細</i><br />
+              <i class="fas fa-info-circle">詳細</i>
+            <% end %>
+            <%= link_to question_answer_path(t.question.id,t.id), method: :delete, class: "detail-li" do %>
+              <i class="fas fa-trash-alt">削除</i><br />
             <% end %>
             <%= t.updated_at.to_s(:datetime_jp) %><br />
           </div>
