@@ -1,16 +1,19 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-offset-2 col-sm-8">
+        <div class="sort-check col-md-6">
 
-        <h1>講義一覧</h1>
-        <input type="checkbox" id="chk1" onclick="chkdisp(this,'grade1-lec')" /><label for="chk1">1年次の講義を表示</label><br />
-        <input type="checkbox" id="chk2" onclick="chkdisp(this,'grade2-lec')" /><label for="chk2">2年次の講義を表示</label><br />
-        <input type="checkbox" id="chk3" onclick="chkdisp(this,'grade3-lec')" /><label for="chk3">3年次の講義を表示</label><br />
-        <input type="checkbox" id="chk4" onclick="chkdisp(this,'grade4-lec')" /><label for="chk4">4年次の講義を表示</label><br />
+            <h3>講義を学年毎に表示</h3>
+            <input type="checkbox" id="chk1" onclick="chkdisp(this,'grade1-lec')" /><label for="chk1">1年次の講義を表示</label><br />
+            <input type="checkbox" id="chk2" onclick="chkdisp(this,'grade2-lec')" /><label for="chk2">2年次の講義を表示</label><br />
+            <input type="checkbox" id="chk3" onclick="chkdisp(this,'grade3-lec')" /><label for="chk3">3年次の講義を表示</label><br />
+            <input type="checkbox" id="chk4" onclick="chkdisp(this,'grade4-lec')" /><label for="chk4">4年次の講義を表示</label><br />
+        </div>
 
+        <div class="lecture-index col-md-6">
+            <h2>講義一覧</h2>
             <div id="grade1-lec" style="display:none;">
                 <% @lecs_g1.order(:term).each do |l| %>
-                    <div class="lec-container">
+                    <div class="lec-container list-group-item">
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
                         <br />
                         <% if user_signed_in? %>
@@ -44,7 +47,7 @@
 
             <div id="grade2-lec" style="display:none;">
                 <% @lecs_g2.order(:term).each do |l| %>
-                    <div class="lec-container">
+                    <div class="lec-container list-group-item">
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
                         <br />
                         <% if user_signed_in? %>
@@ -78,7 +81,7 @@
 
             <div class="grade3-lec" style="display:none;">
                 <% @lecs_g3.order(:term).each do |l| %>
-                    <div class="lec-container">
+                    <div class="lec-container list-group-item">
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
                         <br />
                         <% if user_signed_in? %>
@@ -112,7 +115,7 @@
 
             <div id="grade4-lec" style="display:none;">
                 <% @lecs_g4.order(:term).each do |l| %>
-                    <div class="lec-container">
+                    <div class="lec-container list-group-item">
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
                         <br />
                         <% if user_signed_in? %>
@@ -144,6 +147,7 @@
                 <% end %>
             </div>
         </div>
+
     </div>
 </div>
 

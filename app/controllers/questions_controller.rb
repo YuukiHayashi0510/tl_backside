@@ -27,7 +27,7 @@ class QuestionsController < ApplicationController
   def update
     question = Question.find(params[:id])
     if question.user_id != current_user.id
-      redirect_to root_path, :alert => '不正な編集です'
+      redirect_to top_index_path, :alert => '不正な編集です'
     else
       if question.update(question_params)
         redirect_to :action => "show", :id => question.id
