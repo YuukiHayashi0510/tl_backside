@@ -1,7 +1,10 @@
 class LecturesController < ApplicationController
 
   def index
-    @lectures = Lecture.all
+    @lecs_g1 = Lecture.where(grade: "1") # 1年次の講義
+    @lecs_g2 = Lecture.where(grade: "2") # 2年次の講義
+    @lecs_g3 = Lecture.where(grade: "3") # 3年次の講義
+    @lecs_g4 = Lecture.where(grade: "4") # 4年次の講義
   end
 
   def show
