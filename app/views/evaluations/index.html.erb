@@ -1,5 +1,8 @@
-<h1>Evaluations#index</h1>
-<p>Find me in app/views/evaluations/index.html.erb</p>
+<%= @lecture.name %>
+<%= @lecture.teacher %>
+<%= @lecture.grade %>年次
+<%= @lecture.term %>
+
 <p>評価一覧</p>
 <%= link_to "新しく評価する", evaluations_new_path(params[:lecture_id]) %><br /><br />
 <% @evaluations.each do |t| %>

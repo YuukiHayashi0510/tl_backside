@@ -10,7 +10,7 @@
                 <% @questions.order("created_at desc").each do |question| %>
                     <div class="question">
                         <%= image_tag question.user.image_url,class:"rounded-circle", size: "40x40" if question.user.image? %> <%# アイコン表示 %>
-                        <%= question.user.name %><br />
+                        <%= link_to "#{question.user.name}", user_path(question.user.id), class: "user-li" %>
                         <div id="solve_buttons_<%= question.id %>">
                             <%= render partial: 'questions/make_solved', locals: {question: question} %>
                         </div>
@@ -46,7 +46,6 @@
 
 
         <div class="sub-box col-md-4">
-            <%= link_to "質問ランキング", questions_index_path %><br />
 
             <div class="search-box">
             <div class="search-form">

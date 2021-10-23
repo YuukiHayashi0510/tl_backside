@@ -1,3 +1,53 @@
 // Place all the styles related to the questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+/* ---questions/show.html--- */
+
+// 質問詳細のボックス
+.question-detail {
+    padding: 0.5em 1em;
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+// 回答一覧の枠作り
+.answers-wrapper {
+    padding: 0.5em 1em;
+    margin-top: 7%;
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+// 触った時に少し灰色にする
+.answer:hover {
+    background-color: #f5f5f5;
+}
+
+// 削除などのリンク
+.detail-li:hover{
+    text-decoration: none;
+    color: #CC2C18;
+}
+
+//ユーザー名のリンク
+.user-li {
+    color: black;
+}
+
+.user-li:hover {
+    text-decoration: none;
+    color: #CC2C18;
+}
+
+.answer-form {
+    padding-top: 4%;
+}
+
+.liked-box {
+    padding-top: 4%;
+    padding-bottom: 4%;
+}

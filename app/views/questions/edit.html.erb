@@ -1,13 +1,23 @@
-<h1>Questions#edit</h1>
-<p>Find me in app/views/questions/edit.html.erb</p>
+<div class="edit container">
+    <div class="row">
+        <div class="col-md-8">
+
+<h3>質問の編集</h3>
 
 <%= form_for @question do |f| %>
-    <%= f.label :質問内容 %>
-    <%= f.text_field :body, :size => 140 %> <br />
+    <div class="form-group">
+        <%= f.label :質問内容 %>
+        <%= f.text_area :body, class: "form-control", id: "exampleFormControlTextarea1", rows: "5" %>
+    </div>
     <p>現在の画像</p>
     <%= image_tag @question.image_url, size: "250x200" if @question.image? %><br />
-    <%= f.label :画像 %>
     <%= f.file_field :image %><br />
-    <%= f.submit "編集する" %>
+    <%= f.submit "編集する", class: "btn btn-outline-primary" %>
 <% end %>
-<%= link_to "質問一覧に戻る", top_index_path %>
+
+<%= link_to "詳細に戻る", question_path(@question.id), class: "detail-li" %>
+
+
+        </div>
+    </div>
+</div>

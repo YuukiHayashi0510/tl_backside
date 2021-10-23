@@ -1,53 +1,74 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
-
-<div id="solve_buttons_<%= @question.id %>">
-  <%= render partial: 'questions/make_solved', locals: {question: @question} %>
-</div>
-
-<h3>質問の詳細</h3>
-<div class="question-detail">
-  <%= image_tag @question.image_url, size: "250x200" if @question.image? %>
-  <p><%= @question.body %></p>
-  <%= link_to "編集する", edit_question_path(@question.id) if current_user.id == @question.user_id %><br />
-  <div id="likes_buttons_<%= @question.id %>">
-    <%= render partial: 'likes/like', locals: {question: @question} %>
-  </div>
-  <p><%= @question.updated_at.to_s(:datetime_jp) %></p>
-</div>
-
-<div class="answer-wrapper">
-  <p>回答一覧</p>
-  <% @answers.each do |c| %>
-    <div>
-      <%= c.user.name unless c.user.blank? %>
-      <br>
-      <%= c.body %>
-      <%= link_to "削除する", question_answer_path(c.question.id,c.id), method: :delete if current_user.id == c.user_id %>
-      <%= c.created_at.to_s(:datetime_jp) %>
+<div class="lec-show container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>質問の詳細</h1>
+        <div id="solve_buttons_<%= @question.id %>">
+          <%= render partial: 'questions/make_solved', locals: {question: @question} %>
+        </div>
+      <div class="question-detail">
+        <p><%= safe_join(@question.body.split("\n"),tag(:br)) %></p>
+        <%= image_tag @question.image_url, size: "250x200" if @question.image? %>
+        <% if user_signed_in? && current_user.id == @question.user_id %>
+          <div id="likes_buttons_<%= @question.id %>">
+            <%= render partial: 'likes/like', locals: {question: @question} %>
+          </div>
+          <%= link_to edit_question_path(@question.id), class: "detail-li" do %>
+            <i class="fas fa-pen">編集</i>
+          <% end %>
+        <% end %>
+        <p><%= @question.updated_at.to_s(:datetime_jp) %></p>
+      </div>
     </div>
-      <br>
-  <% end %>
+
+
+    <div class="col-md-6">
+      <h1>回答一覧</h1>
+      <div class="answers-wrapper">
+        <% @answers.each do |answer| %>
+          <div class="answer">
+            <%= image_tag answer.user.image_url,class:"rounded-circle", size: "40x40" if answer.user.image? %> 
+            <%= link_to "#{answer.user.name}", user_path(answer.user.id), class: "user-li" %><br>
+            <%= safe_join(answer.body.split("\n"),tag(:br)) %><br />
+            <% if user_signed_in? && current_user.id == answer.user_id  %>
+              <%= link_to question_answer_path(answer.question.id,answer.id), method: :delete, class: "detail-li" do %>
+                <i class="fas fa-trash-alt">削除</i><br />
+              <% end %>
+            <% end %>
+            <%= answer.created_at.to_s(:datetime_jp) %><br>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="answer-form">
+        <% if user_signed_in? && @question.solved == false %>
+          <h3>回答の投稿</h3>
+          <%= form_with(model: [@question,@answer], local: true) do |f| %>
+            <%= f.text_area :body, class: "form-control", id: "exampleFormControlTextarea1", row: "3"%>
+            <%= button_tag type: "submit" do %>
+              <i class="far fa-comments"></i> 回答する
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+    <div class="liked-box">
+      <h3>いいねしたユーザー</h3>
+        <% @question.liked_users.each do |user| %>
+          <%= image_tag user.image_url,class:"rounded-circle", size: "40x40" if user.image? %>
+          <%= link_to "#{user.name}", user_path(user.id), class: "user-li" %><br />
+        <% end %>
+      </div>
+        <%= link_to "質問一覧に戻る", top_index_path, class: "detail-li" %>
+    </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
 </div>
-
-<div class="answer-form">
-  <% if user_signed_in? && @question.solved == false %>
-  <p>回答の投稿</p>
-    <%= form_with(model: [@question,@answer], local: true) do |f| %>
-      <%= f.text_area :body %>
-      <%= button_tag type: "submit" do %>
-        <i class="far fa-comments"></i> 回答する
-      <% end %>
-    <% end %>
-  <% end %>
-</div>
-
-
-
-<h2>いいねしたユーザー</h2>
-<% @question.liked_users.each do |user| %>
-  <li><%= user.name %></li>
-<% end %>
-
-
-<%= link_to "一覧に戻る", top_index_path %>

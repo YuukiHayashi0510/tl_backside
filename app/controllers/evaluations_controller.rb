@@ -3,6 +3,7 @@ class EvaluationsController < ApplicationController
 
   def index
     @evaluations = Evaluation.where(lecture_id: params[:lecture_id])
+    @lecture = Lecture.find(params[:lecture_id])
   end
 
   def show
@@ -30,7 +31,7 @@ class EvaluationsController < ApplicationController
 
   def update
     evaluation = Evaluation.find(params[:id])
-    if evaluation.id != current_user.id
+    if evaluation.user.id != current_user.id
       redirect_to root_path, :alert => '不正な編集です'
     else
       if evaluation.update(evaluation_params)

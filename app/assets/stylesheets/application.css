@@ -24,10 +24,14 @@
 /*ページと共に動くヘッダー*/
 header {
     width: 100%; /* 幅はマックス*/
-    top: 0; /*　常にページ上部に固定　*/
+    top: 0; /* 常にページ上部に固定 */
     z-index: 1; /* bodyとheaderの重なり*/
     position: fixed; /*headerの固定*/
     background-color: #0457CC;
+}
+
+.navbar {
+    padding-bottom: 0;
 }
 
 /* ヘッダーのリストの並びを整える */
