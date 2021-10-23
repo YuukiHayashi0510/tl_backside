@@ -3,10 +3,10 @@
         <div class="sort-check col-md-6">
 
             <h3>講義を学年毎に表示</h3>
-            <input type="checkbox" id="chk1" onclick="chkdisp(this,'grade1-lec')" /><label for="chk1">1年次の講義を表示</label><br />
-            <input type="checkbox" id="chk2" onclick="chkdisp(this,'grade2-lec')" /><label for="chk2">2年次の講義を表示</label><br />
-            <input type="checkbox" id="chk3" onclick="chkdisp(this,'grade3-lec')" /><label for="chk3">3年次の講義を表示</label><br />
-            <input type="checkbox" id="chk4" onclick="chkdisp(this,'grade4-lec')" /><label for="chk4">4年次の講義を表示</label><br />
+            <input type="checkbox" id="chk1" onclick="chkdisp(this,'grade1-lec')" class="checkbox" />&nbsp;<label for="chk1">1年次の講義を表示</label><br />
+            <input type="checkbox" id="chk2" onclick="chkdisp(this,'grade2-lec')" class="checkbox" />&nbsp;<label for="chk2">2年次の講義を表示</label><br />
+            <input type="checkbox" id="chk3" onclick="chkdisp(this,'grade3-lec')" class="checkbox" />&nbsp;<label for="chk3">3年次の講義を表示</label><br />
+            <input type="checkbox" id="chk4" onclick="chkdisp(this,'grade4-lec')" class="checkbox" />&nbsp;<label for="chk4">4年次の講義を表示</label><br />
         </div>
 
         <div class="lecture-index col-md-6">
@@ -17,30 +17,10 @@
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
                         <br />
                         <% if user_signed_in? %>
-
-                            <% if current_user.already_current_registered?(l) %>
-                                <%= link_to lecture_current_lectures_path(l), method: :delete,class:"btn btn-danger" do %>
-                                現在の講義を取り消す
-                                <% end %>
-                            <% else %>
-
-                                <% if current_user.already_past_registered?(l) %>
-                                    <%= link_to lecture_past_lectures_path(l), method: :delete,class:"btn btn-danger" do %>
-                                    過去の講義を取り消す
-                                    <% end %>
-                                <% else %>
-                                    <%= link_to lecture_current_lectures_path(l), method: :post, class:"btn btn-success" do %>
-                                        現在の講義に登録
-                                    <% end %>
-                                    <%= link_to lecture_past_lectures_path(l), method: :post, class:"btn btn-secondary" do %>
-                                        過去の講義に登録
-                                    <% end %>
-                                <% end %>
-
-                            <% end %>
-
-                        <% end %>
-                        <br />
+                            <div class="register_<%= l.id %>">
+                            <%= render partial: 'lectures/register', locals: {l: l} %>
+                            </div>
+                        <% end %><br />
                     </div>
                 <% end %>
             </div>
@@ -115,7 +95,7 @@
 
             <div id="grade4-lec" style="display:none;">
                 <% @lecs_g4.order(:term).each do |l| %>
-                    <div class="lec-container list-group-item">
+                    <div class="lec-container">
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
                         <br />
                         <% if user_signed_in? %>

@@ -1,30 +1,30 @@
-<h3>講義詳細ページ</h3>
-
 <div class="container">
-  <div class="title row">
-    <p><%= @lecture.name %>
-    <%= @lecture.teacher %>
-    <%= @lecture.grade %>年次
-    <%= @lecture.term %></p>
-
-  <% if current_user.already_current_registered?(@lecture) %>
-    <%= link_to lecture_current_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
-      現在の講義を取り消す
-    <% end %>
-  <% else %>
-    <% if current_user.already_past_registered?(@lecture) %>
-      <%= link_to lecture_past_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
-        過去の講義を取り消す
+  <div class="row">
+    <div class="title col-md-offset-2 col-md-6">
+      <h2>講義詳細ページ</h2>
+      <%= @lecture.name %>
+      <%= @lecture.teacher %>
+      <%= @lecture.grade %>年次
+      <%= @lecture.term %>
+    </div>
+    <% if current_user.already_current_registered?(@lecture) %>
+      <%= link_to lecture_current_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
+        現在の講義を取り消す
       <% end %>
     <% else %>
-      <%= link_to lecture_current_lectures_path(@lecture), method: :post, class:"btn btn-success" do %>
-        現在の講義に登録
+      <% if current_user.already_past_registered?(@lecture) %>
+        <%= link_to lecture_past_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
+          過去の講義を取り消す
+        <% end %>
+      <% else %>
+        <%= link_to lecture_current_lectures_path(@lecture), method: :post, class:"btn btn-success" do %>
+          現在の講義に登録
+        <% end %>
+        <%= link_to lecture_past_lectures_path(@lecture), method: :post, class:"btn btn-secondary" do %>
+          過去の講義に登録
+        <% end %>
       <% end %>
-      <%= link_to lecture_past_lectures_path(@lecture), method: :post, class:"btn btn-secondary" do %>
-        過去の講義に登録
-      <% end %>
-    <% end %>
-  <% end %><br />
+    <% end %><br />
 
   </div>
 
