@@ -7,7 +7,7 @@
 
         <div class="field">
           <%= f.label :ユーザーネーム %><br />
-          <%= f.text_field :name, class: "form-control", autofocus: true, autocomplete: "name" %>
+          <%= f.text_field :name, class: "form-control", autofocus: true, autocomplete: "name", required: true %>
         </div>
 
         <div class="field">
@@ -17,7 +17,7 @@
 
         <div class="field">
           <%= f.label :メールアドレス %><br />
-          <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", required: true %>
         </div>
 
         <div class="field">
