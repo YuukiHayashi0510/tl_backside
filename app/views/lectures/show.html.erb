@@ -1,63 +1,133 @@
 <div class="title container">
   <h2>講義詳細ページ</h2>
-  <h3><%= @lecture.name %>
-  <%= @lecture.teacher %>
-  <%= @lecture.grade %>年次
-  <%= @lecture.term %></h3>
-</div><br />
+</div>
 
 <div class="lec-show container">
 
   <div class="row">
+    <div class="col-md-6">
+        <h3><%= @lecture.name %>
+        <%= @lecture.teacher %>
+        <%= @lecture.grade %>年次
+        <%= @lecture.term %></h3>
+      <% if current_user.already_current_registered?(@lecture) %>
+          <%= link_to lecture_current_lectures_path(@lecture), method: :delete,class:"btn btn-danger", remote: true do %>
+              現在の講義を取り消す
+          <% end %>
 
+      <% else %>
+          <% if current_user.already_past_registered?(@lecture) %>
+              <%= link_to lecture_past_lectures_path(@lecture), method: :delete,class:"btn btn-danger", remote: true do %>
+                  過去の講義を取り消す
+              <% end %>
+          <% else %>
+              <%= link_to lecture_current_lectures_path(@lecture), method: :post, class:"btn btn-success", remote: true do %>
+                  現在の講義に登録
+              <% end %>
+              <%= link_to lecture_past_lectures_path(@lecture), method: :post, class:"btn btn-secondary", remote: true do %>
+                  過去の講義に登録
+              <% end %>
+          <% end %>
+      <% end %><br />
+        <div class="ave-eva-box">
+          <h4>平均評価</h4>
+          <%= link_to "評価一覧", evaluations_index_path(@lecture.id), class: "detail-li" %>
 
-  </div>
+          <div style = 'border:2px double black; width:72%;' class="ave-eva">
 
+            <!-- 総合評価の星の部分 --->
+            <div>
+              <h5>総合評価：
+                <span class="star-rating">
+                  <span class="star-rating-front" style="width: <%= getPercent(@ave_overall) %>%;">★★★★★</span>
+                  <span class="star-rating-back">★★★★★</span>
+                </span> 
+              </h5>
+            </div>
 
-    <div class="register_<%= @lecture %>">
-      <%= render partial: 'lectures/register', locals: {l: @lecture} %>
-    </div>
-  
-  <%= link_to "評価", evaluations_index_path(@lecture.id), class: "detail-li" %><br />
+            <!-- わかりやすさの星の部分 --->
+            <div>
+              <h5>わかりやすさ：
+                <span class="star-rating">
+                  <span class="star-rating-front" style="width: <%= getPercent(@ave_understandability) %>%;">★★★★★</span>
+                  <span class="star-rating-back">★★★★★</span>
+                </span>
+              </h5>
+            </div>
 
-  <div class="pdf-wrapper">
-    <h3>過去問PDF</h3>
-    <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf), class: "detail-li" unless @lecture.pdf.blank? %>
+            <!-- 将来的有用性の星の部分 --->
+            <div>
+              <h5>将来的有用性：
+                <span class="star-rating">
+                  <span class="star-rating-front" style="width: <%= getPercent(@ave_usefulness) %>%;">★★★★★</span>
+                  <span class="star-rating-back">★★★★★</span>
+                </span>
+              </h5>
+            </div>
 
-    <%= form_with(model: [@lecture], local: true) do |f| %>
-      <%= f.label :pdf %>
-      <%= f.file_field :pdf %><br />
-      <%= button_tag type: "submit" do %>
-        送信する
-      <% end %>
-    <% end %>
-  </div>
+            <!-- 楽単の星の部分 --->
+              <div>
+                <h5>楽単具合：
+                  <span class="star-rating">
+                    <span class="star-rating-front" style="width: <%= getPercent(@ave_easy) %>%;">★★★★★</span>
+                    <span class="star-rating-back">★★★★★</span>
+                  </span>
+                </h5>
+              </div>
 
-  <div class="comment-wrapper">
-    <h3>コメント一覧</h3>
-    <div class="comments">
-      <% @comments.each do |c| %>
-        <div class="comment-box">
-          <%= c.user.name unless c.user.blank? %>
-          <br>
-          <%= c.body %>
-          <%= link_to lecture_comment_path(@lecture.id,c.id), method: :delete, class: "detail-li" do %>
-            <i class="fas fa-trash-alt">削除</i><br />
-          <% end %><br />
-          <%= c.created_at.to_s(:datetime_jp) %><br />
+            <!-- 課題・レポートの量の星の部分 --->
+              <div>
+                <h5>課題・レポート量：
+                  <span class="star-rating">
+                    <span class="star-rating-front" style="width: <%= getPercent(@ave_assignment) %>%;">★★★★★</span>
+                    <span class="star-rating-back">★★★★★</span>
+                  </span>
+                </h5>
+              </div>
         </div>
-      <% end %>
-    </div>
 
-    <% if user_signed_in? %>
-      <%= form_with(model: [@lecture, @comment], local: true) do |f| %>
-        <%= f.text_area :body %>
-        <%= button_tag type: "submit" do %>
-          <i class="far fa-comments"></i> コメントする
+      <div class="pdf-wrapper">
+        <h3>過去問PDF</h3>
+        <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf), class: "detail-li" unless @lecture.pdf.blank? %>
+
+        <h4>PDF投稿</h4>
+        <%= form_with(model: [@lecture], local: true) do |f| %>
+          <%= f.file_field :pdf %><br />
+          <%= f.submit "送信", class: "btn btn-outline-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="comment-wrapper">
+      <h3>コメント一覧</h3>
+      <div class="comments">
+        <% @comments.each do |c| %>
+          <div class="comment-box">
+            <%= image_tag c.user.image_url,class:"rounded-circle", size: "40x40" if c.user.image? %>
+            <%= link_to "#{c.user.name}", user_path(c.user.id), class: "user-li" %><br />
+            <%= c.body %><br />
+            <%= link_to lecture_comment_path(@lecture.id,c.id), method: :delete, class: "detail-li" do %>
+              <i class="fas fa-trash-alt">削除</i>
+            <% end %><br />
+            <%= c.created_at.to_s(:datetime_jp) %><br />
+          </div>
+        <% end %>
+      </div>
+
+      <% if user_signed_in? %>
+        <%= form_with(model: [@lecture, @comment], local: true) do |f| %>
+          <h3>コメント投稿</h3>
+          <%= f.text_area :body, class: "form-control", id: "exampleFormControlTextarea1" %>
+          <%= f.submit "コメントする", class: "btn btn-outline-primary" %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+      <%= link_to "講義一覧に戻る", lectures_path, class: "detail-li" %>
 
-  <%= link_to "講義一覧に戻る", lectures_path, class: "detail-li" %>
+    </div>
+
 </div>
+
+
+

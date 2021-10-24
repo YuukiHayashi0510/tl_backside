@@ -11,6 +11,31 @@ class LecturesController < ApplicationController
     @lecture = Lecture.find(params[:id])
     @comments = @lecture.comments
     @comment = Comment.new
+    evaluations = Evaluation.where(lecture_id: @lecture.id)
+
+    # 平均評価の計算
+    n=0
+    overall=0
+    understandability=0
+    usefulness=0
+    easy=0
+    assignment=0
+    evaluations.each do |ev|
+      overall += ev.overall
+      understandability += ev.understandability 
+      usefulness += ev.usefulness
+      easy += ev.easy
+      assignment += ev.assignment
+      n+=1
+    end
+
+    if n != 0 and overall != 0 and understandability != 0 and usefulness!=0 and easy!=0 and assignment!=0
+      @ave_overall = overall/n
+      @ave_understandability = understandability/n
+      @ave_usefulness = usefulness/n
+      @ave_easy = easy/n
+      @ave_assignment = assignment/n
+    end
   end
 
   def update
