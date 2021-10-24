@@ -98,7 +98,7 @@
           <div class="comment-box">
             <%= image_tag c.user.image_url,class:"rounded-circle", size: "40x40" if c.user.image? %>
             <%= link_to "#{c.user.name}", user_path(c.user.id), class: "user-li" %><br />
-            <%= c.body %><br />
+            <%= safe_join(c.body.split("\n"),tag(:br)) %><br />
             <% if current_user.id == c.user.id %>
               <%= link_to lecture_comment_path(@lecture.id,c.id), method: :delete, class: "detail-li" do %>
                 <i class="fas fa-trash-alt">削除</i>
