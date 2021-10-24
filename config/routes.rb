@@ -59,6 +59,9 @@ Rails.application.routes.draw do
 
   resources :evaluations
 
-  root 'top#about'
+  # ログイン画面をrootにする
+  devise_scope :user do
+    root "users/sessions#new"
+  end
 
 end

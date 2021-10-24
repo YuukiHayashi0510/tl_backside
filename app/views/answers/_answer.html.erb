@@ -1,0 +1,14 @@
+
+<% answers.each do |answer| %>
+    <div class="answer">
+        <%= image_tag answer.user.image_url,class:"rounded-circle", size: "40x40" if answer.user.image? %> 
+        <%= link_to "#{answer.user.name}", user_path(answer.user.id), class: "user-li" %><br>
+        <%= safe_join(answer.body.split("\n"),tag(:br)) %><br />
+        <% if user_signed_in? && current_user.id == answer.user_id  %>
+            <%= link_to question_answer_path(answer.question.id,answer.id), method: :delete, remote: true, class: "detail-li" do %>
+                <i class="fas fa-trash-alt">削除</i><br />
+            <% end %>
+        <% end %>
+        <%= answer.created_at.to_s(:datetime_jp) %><br>
+    </div>
+<% end %>

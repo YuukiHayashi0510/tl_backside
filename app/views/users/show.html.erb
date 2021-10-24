@@ -72,6 +72,9 @@
         <% @user.current_lectures.each do |t| %>
           <div class="c-lecture list-group-item">
               <%= link_to "#{t.lecture.name} #{t.lecture.teacher} #{t.lecture.term}",lecture_path(t.lecture.id), class: "lecture-li" %><br />
+              <%= link_to lecture_current_lectures_path(t.lecture), method: :delete,class:"btn btn-danger" do %>
+                現在の講義を取り消す
+              <% end %>
           </div>
         <% end %>
     </div>
