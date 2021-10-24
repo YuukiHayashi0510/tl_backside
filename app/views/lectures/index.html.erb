@@ -18,20 +18,20 @@
                         <br />
                         <% if user_signed_in? %>
                             <% if current_user.already_current_registered?(l) %>
-                                <%= link_to lecture_current_lectures_path(l), method: :delete,class:"btn btn-danger", remote: true do %>
+                                <%= link_to lecture_current_lectures_path(l), method: :delete,class:"btn btn-danger" do %>
                                     現在の講義を取り消す
                                 <% end %>
 
                             <% else %>
                                 <% if current_user.already_past_registered?(l) %>
-                                    <%= link_to lecture_past_lectures_path(l), method: :delete,class:"btn btn-danger", remote: true do %>
+                                    <%= link_to lecture_past_lectures_path(l), method: :delete,class:"btn btn-danger" do %>
                                         過去の講義を取り消す
                                     <% end %>
                                 <% else %>
-                                    <%= link_to lecture_current_lectures_path(l), method: :post, class:"btn btn-success", remote: true do %>
+                                    <%= link_to lecture_current_lectures_path(l), method: :post, class:"btn btn-success" do %>
                                         現在の講義に登録
                                     <% end %>
-                                    <%= link_to lecture_past_lectures_path(l), method: :post, class:"btn btn-secondary", remote: true do %>
+                                    <%= link_to lecture_past_lectures_path(l), method: :post, class:"btn btn-secondary" do %>
                                         過去の講義に登録
                                     <% end %>
                                 <% end %>

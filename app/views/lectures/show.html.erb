@@ -86,16 +86,7 @@
               </div>
         </div>
 
-      <div class="pdf-wrapper">
-        <h3>過去問PDF</h3>
-        <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf), class: "detail-li" unless @lecture.pdf.blank? %>
 
-        <h4>PDF投稿</h4>
-        <%= form_with(model: [@lecture], local: true) do |f| %>
-          <%= f.file_field :pdf %><br />
-          <%= f.submit "送信", class: "btn btn-outline-primary" %>
-        <% end %>
-      </div>
     </div>
   </div>
 
