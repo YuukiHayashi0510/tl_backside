@@ -69,7 +69,8 @@
                     <% if current_user.id == t.user_id %>
                         <%= link_to edit_evaluation_path(t.id), class: "detail-li" do %>
                             <i class="fas fa-pen">編集</i>
-                        <% end %>
+                        <% end %>&nbsp;
+                        <%= t.created_at.to_s(:datetime_jp) %>
                     <% end %>
                 </div>
 
