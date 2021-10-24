@@ -14,11 +14,11 @@
             <div id="grade1-lec" style="display:none;">
                 <% @lecs_g1.order(:term).each do |l| %>
                     <div class="lec-container list-group-item">
-                        <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
+                        <h5><%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %></h5>
                         <br />
                         <% if user_signed_in? %>
-                            <div class="register_<%= l.id %>">
-                            <%= render partial: 'lectures/register', locals: {l: l} %>
+                            <div id="register_<%= l.id %>">
+                                <%= render partial: 'lectures/register', locals: {l: l} %>
                             </div>
                         <% end %><br />
                     </div>

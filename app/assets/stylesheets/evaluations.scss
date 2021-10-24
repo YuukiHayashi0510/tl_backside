@@ -48,7 +48,7 @@
     color: #ffcc00;
 }
 
-
+/* eva-index */
 /* 以下一覧ページの星用のCSS */
 
 .star-rating {
@@ -71,4 +71,13 @@
 .star-rating-back {
     display: inline-block;
     color: #ccc;
+}
+
+.title-box {
+    text-align: center;
+}
+
+/* eva-new*/
+.eva-new h2 {
+    text-align: left;
 }

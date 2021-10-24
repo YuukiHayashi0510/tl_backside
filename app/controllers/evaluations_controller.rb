@@ -19,6 +19,7 @@ class EvaluationsController < ApplicationController
     evaluation.user_id = current_user.id
     evaluation.lecture_id = params[:lecture_id]
     if evaluation.save!
+      
       redirect_to evaluations_index_path(params[:lecture_id])
     else
       redirect_to evaluations_new_path(paramas[:lecture_id])
@@ -32,7 +33,7 @@ class EvaluationsController < ApplicationController
   def update
     evaluation = Evaluation.find(params[:id])
     if evaluation.user.id != current_user.id
-      redirect_to root_path, :alert => '不正な編集です'
+      redirect_to evaluations_index_path(evaluation.lecture_id), :alert => '不正な編集です'
     else
       if evaluation.update(evaluation_params)
         redirect_to evaluations_index_path(evaluation.lecture_id)

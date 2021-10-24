@@ -1,40 +1,25 @@
-<div class="container">
+<div class="lec-show container">
   <div class="row">
-    <div class="title col-md-offset-2 col-md-6">
+    <div class="title col-md-offset-4 col-md-6">
       <h2>講義詳細ページ</h2>
-      <%= @lecture.name %>
+      <h3><%= @lecture.name %>
       <%= @lecture.teacher %>
       <%= @lecture.grade %>年次
-      <%= @lecture.term %>
-    </div>
-    <% if current_user.already_current_registered?(@lecture) %>
-      <%= link_to lecture_current_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
-        現在の講義を取り消す
-      <% end %>
-    <% else %>
-      <% if current_user.already_past_registered?(@lecture) %>
-        <%= link_to lecture_past_lectures_path(@lecture), method: :delete,class:"btn btn-danger" do %>
-          過去の講義を取り消す
-        <% end %>
-      <% else %>
-        <%= link_to lecture_current_lectures_path(@lecture), method: :post, class:"btn btn-success" do %>
-          現在の講義に登録
-        <% end %>
-        <%= link_to lecture_past_lectures_path(@lecture), method: :post, class:"btn btn-secondary" do %>
-          過去の講義に登録
-        <% end %>
-      <% end %>
-    <% end %><br />
+      <%= @lecture.term %></h3>
+    </div><br />
 
   </div>
 
 
-
-  <%= link_to "評価", evaluations_index_path(@lecture.id) %><br />
+    <div class="register_<%= @lecture %>">
+      <%= render partial: 'lectures/register', locals: {l: @lecture} %>
+    </div>
+  
+  <%= link_to "評価", evaluations_index_path(@lecture.id), class: "detail-li" %><br />
 
   <div class="pdf-wrapper">
     <h3>過去問PDF</h3>
-    <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf) unless @lecture.pdf.blank?%>
+    <%= link_to "#{@lecture.pdf_url.split('/').last.split('.').first}", @lecture.pdf_url(format: :pdf), class: "detail-li" unless @lecture.pdf.blank? %>
 
     <%= form_with(model: [@lecture], local: true) do |f| %>
       <%= f.label :pdf %>
@@ -47,25 +32,29 @@
 
   <div class="comment-wrapper">
     <h3>コメント一覧</h3>
-    <% @comments.each do |c| %>
-      <div>
-        <%= c.user.name unless c.user.blank? %>
-        <br>
-        <%= c.body %>
-        <%= link_to "削除する", lecture_comment_path(@lecture.id, c.id), method: :delete %>
-      </div>
-        <br>
-    <% end %>
+    <div class="comments">
+      <% @comments.each do |c| %>
+        <div class="comment-box">
+          <%= c.user.name unless c.user.blank? %>
+          <br>
+          <%= c.body %>
+          <%= link_to lecture_comment_path(@lecture.id,c.id), method: :delete, class: "detail-li" do %>
+            <i class="fas fa-trash-alt">削除</i><br />
+          <% end %><br />
+          <%= c.created_at.to_s(:datetime_jp) %><br />
+        </div>
+      <% end %>
+    </div>
 
     <% if user_signed_in? %>
       <%= form_with(model: [@lecture, @comment], local: true) do |f| %>
         <%= f.text_area :body %>
         <%= button_tag type: "submit" do %>
-  <i class="far fa-comments"></i> コメントする
+          <i class="far fa-comments"></i> コメントする
         <% end %>
       <% end %>
     <% end %>
   </div>
 
-  <%= link_to "講義一覧に戻る", lectures_path %>
+  <%= link_to "講義一覧に戻る", lectures_path, class: "detail-li" %>
 </div>

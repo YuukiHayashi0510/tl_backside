@@ -1,68 +1,82 @@
-<%= @lecture.name %>
-<%= @lecture.teacher %>
-<%= @lecture.grade %>年次
-<%= @lecture.term %>
-
-<p>評価一覧</p>
-<%= link_to "新しく評価する", evaluations_new_path(params[:lecture_id]) %><br /><br />
-<% @evaluations.each do |t| %>
-    <div style = 'margin:20px; border:2px double black; width:500px;padding-left:20px;'>
-
-        <!-- 総合評価の星の部分 --->
-        <div>
-        <h2>総合評価：
-        <span class="star-rating">
-            <span class="star-rating-front" style="width: <%= getPercent(t.overall) %>%;">★★★★★</span>
-            <span class="star-rating-back">★★★★★</span>
-        </span> 
-        </h2>
-        </div>
-
-        <!-- わかりやすさの星の部分 --->
-        <div>
-        <h2>わかりやすさ：
-        <span class="star-rating">
-            <span class="star-rating-front" style="width: <%= getPercent(t.understandability) %>%;">★★★★★</span>
-            <span class="star-rating-back">★★★★★</span>
-        </span>
-        </h2>
-        </div>
-
-        <!-- 将来的有用性の星の部分 --->
-        <div>
-        <h2>将来的有用性：
-        <span class="star-rating">
-            <span class="star-rating-front" style="width: <%= getPercent(t.usefulness) %>%;">★★★★★</span>
-            <span class="star-rating-back">★★★★★</span>
-        </span>
-        </h2>
-        </div>
-
-        <!-- 楽単の星の部分 --->
-        <div>
-        <h2>楽単具合：
-        <span class="star-rating">
-            <span class="star-rating-front" style="width: <%= getPercent(t.easy) %>%;">★★★★★</span>
-            <span class="star-rating-back">★★★★★</span>
-        </span>
-        </h2>
-        </div>
-
-        <!-- 課題・レポートの量の星の部分 --->
-        <div>
-        <h2>課題・レポートの量：
-        <span class="star-rating">
-            <span class="star-rating-front" style="width: <%= getPercent(t.assignment) %>%;">★★★★★</span>
-            <span class="star-rating-back">★★★★★</span>
-        </span>
-        </h2>
-        </div>
-
+<div class="eva-index container">
+    <h2>評価一覧</h2>
+    <div class="title-box">
+        <h5><%= @lecture.name %>
+        <%= @lecture.teacher %>
+        <%= @lecture.grade %>年次
+        <%= @lecture.term %></h5>
     </div>
-<%= link_to "編集する", edit_evaluation_path(t.id) if current_user.id == t.user_id %>
-<br />
+    
+    <div class="list-group list-group-horizontal">
+        <%= link_to "新しい評価", evaluations_new_path(params[:lecture_id]), class: "detail-li list-group-item" %><br />
+        <%= link_to "講義詳細", lecture_path(params[:lecture_id]),  class: "detail-li list-group-item" %>
+    </div>
+
+    <div class="row">
+        <% @evaluations.each do |t| %>
+            <div class="eva-box col-md-6">
+                <div style = 'margin:2%; border:2px double black; width:100%;'>
+
+                    <!-- 総合評価の星の部分 --->
+                    <div>
+                    <h2>総合評価：
+                    <span class="star-rating">
+                        <span class="star-rating-front" style="width: <%= getPercent(t.overall) %>%;">★★★★★</span>
+                        <span class="star-rating-back">★★★★★</span>
+                    </span> 
+                    </h2>
+                    </div>
+
+                    <!-- わかりやすさの星の部分 --->
+                    <div>
+                    <h2>わかりやすさ：
+                    <span class="star-rating">
+                        <span class="star-rating-front" style="width: <%= getPercent(t.understandability) %>%;">★★★★★</span>
+                        <span class="star-rating-back">★★★★★</span>
+                    </span>
+                    </h2>
+                    </div>
+
+                    <!-- 将来的有用性の星の部分 --->
+                    <div>
+                    <h2>将来的有用性：
+                    <span class="star-rating">
+                        <span class="star-rating-front" style="width: <%= getPercent(t.usefulness) %>%;">★★★★★</span>
+                        <span class="star-rating-back">★★★★★</span>
+                    </span>
+                    </h2>
+                    </div>
+
+                    <!-- 楽単の星の部分 --->
+                    <div>
+                    <h2>楽単具合：
+                    <span class="star-rating">
+                        <span class="star-rating-front" style="width: <%= getPercent(t.easy) %>%;">★★★★★</span>
+                        <span class="star-rating-back">★★★★★</span>
+                    </span>
+                    </h2>
+                    </div>
+
+                    <!-- 課題・レポートの量の星の部分 --->
+                    <div>
+                    <h2>課題・レポート量：
+                    <span class="star-rating">
+                        <span class="star-rating-front" style="width: <%= getPercent(t.assignment) %>%;">★★★★★</span>
+                        <span class="star-rating-back">★★★★★</span>
+                    </span>
+                    </h2>
+                    </div>
+                    <% if current_user.id == t.user_id %>
+                        <%= link_to edit_evaluation_path(t.id), class: "detail-li" do %>
+                            <i class="fas fa-pen">編集</i>
+                        <% end %>
+                    <% end %>
+                </div>
+
+                <br />
+            </div>
+        <% end %>
+    </div>
 
 
-<% end %>
-
-<%= link_to "講義詳細に戻る", lecture_path(params[:lecture_id]) %>
+</div>

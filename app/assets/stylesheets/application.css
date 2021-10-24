@@ -62,7 +62,7 @@ header li {
 
 /*headerとbodyの重なり*/
 body {
-    margin-top: 5%; /* 重なりを意識したmargin */
+    margin-top: 7%; /* 重なりを意識したmargin */
     z-index: auto;
     background-color: #fbf6f6;
     font-family: 'Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック','Yu Gothic','メイリオ', 'Meiryo','ＭＳ Ｐゴシック','MS PGothic';
