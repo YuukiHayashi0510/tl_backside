@@ -75,7 +75,7 @@
                 <% end %>
             </div>
 
-            <div class="grade3-lec" style="display:none;">
+            <div id="grade3-lec" style="display:none;">
                 <% @lecs_g3.order(:term).each do |l| %>
                     <div class="lec-container list-group-item">
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
@@ -111,7 +111,7 @@
 
             <div id="grade4-lec" style="display:none;">
                 <% @lecs_g4.order(:term).each do |l| %>
-                    <div class="lec-container">
+                    <div class="lec-container list-group-item">
                         <%= link_to "#{l.name} #{l.teacher} #{l.grade}年次 #{l.term}", lecture_path(l.id), class: "lec-content" %>
                         <br />
                         <% if user_signed_in? %>
