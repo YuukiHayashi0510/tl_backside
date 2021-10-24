@@ -34,11 +34,13 @@
             <%= link_to question_path(t.id), class: "detail-li" do %>
               <i class="fas fa-info-circle">詳細</i>
             <% end %>
-            <%= link_to edit_question_path(t.id), class: "detail-li" do %>
-              <i class="fas fa-pen">編集</i>
-            <% end %>
-            <%= link_to question_path(t.id), method: :delete, class: "detail-li" do %>
-              <i class="fas fa-trash-alt">削除</i><br />
+            <% if current_user.id == @user.id && user_signed_in? %>
+              <%= link_to edit_question_path(t.id), class: "detail-li" do %>
+                <i class="fas fa-pen">編集</i>
+              <% end %>
+              <%= link_to question_path(t.id), method: :delete, class: "detail-li" do %>
+                <i class="fas fa-trash-alt">削除</i><br />
+              <% end %>
             <% end %>
             <%= t.updated_at.to_s(:datetime_jp) %><br />
           </div>
@@ -55,8 +57,10 @@
             <%= link_to question_path(t.question.id), class: "detail-li" do %>
               <i class="fas fa-info-circle">詳細</i>
             <% end %>
-            <%= link_to question_answer_path(t.question.id,t.id), method: :delete, class: "detail-li" do %>
-              <i class="fas fa-trash-alt">削除</i><br />
+            <% if current_user.id == @user.id && user_signed_in? %>
+              <%= link_to question_answer_path(t.question.id,t.id), method: :delete, class: "detail-li" do %>
+                <i class="fas fa-trash-alt">削除</i><br />
+              <% end %>
             <% end %>
             <%= t.created_at.to_s(:datetime_jp) %><br />
           </div>
@@ -72,8 +76,10 @@
         <% @user.current_lectures.each do |t| %>
           <div class="c-lecture list-group-item">
               <%= link_to "#{t.lecture.name} #{t.lecture.teacher} #{t.lecture.term}",lecture_path(t.lecture.id), class: "lecture-li" %><br />
-              <%= link_to lecture_current_lectures_path(t.lecture), method: :delete,class:"btn btn-danger" do %>
-                現在の講義を取り消す
+              <% if current_user.id == @user.id && user_signed_in? %>
+                <%= link_to lecture_current_lectures_path(t.lecture), method: :delete,class:"btn btn-danger" do %>
+                  現在の講義を取り消す
+                <% end %>
               <% end %>
           </div>
         <% end %>
