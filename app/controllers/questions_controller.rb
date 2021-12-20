@@ -67,11 +67,7 @@ class QuestionsController < ApplicationController
   end
 
   def bool_params
-    params.require(:post).permit(:question,:solved,:id)
+    params.require(:question).permit(:solved,:id)
   end
-
-  def solve_params
-    @question = Question.find(params[:id])
-  end 
 
 end
