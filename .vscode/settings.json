@@ -1,9 +1,0 @@
-{
-    "workbench.iconTheme": "vscode-icons",
-    "window.zoomLevel": -2,
-    "emmet.triggerExpansionOnTab": true,
-
-    "emmet.includeLanguages": {
-        "erb": "html"
-    }
-}

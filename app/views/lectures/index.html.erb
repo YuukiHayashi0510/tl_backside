@@ -81,7 +81,7 @@
 
                             <% if current_user.already_current_registered?(l) %>
                                 <%= link_to lecture_current_lectures_path(l), method: :delete,class:"btn btn-danger" do %>
-                                現在の講義を取り消す
+                                    現在の講義を取り消す
                                 <% end %>
                             <% else %>
 
@@ -143,13 +143,13 @@
     </div>
 </div>
 
-<script type="text/javascript"><!--
- function chkdisp( obj,id ) {
-  if( obj.checked ){
-   document.getElementById(id).style.display = "block";
-  }
-  else {
-   document.getElementById(id).style.display = "none";
-  }
- }
-// --></script>
+<script type="text/javascript">
+function chkdisp( obj,id ) {
+    if( obj.checked ){
+        document.getElementById(id).style.display = "block";
+    }
+    else {
+        document.getElementById(id).style.display = "none";
+    }
+}
+</script>
